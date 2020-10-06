@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Slider from "react-slick";
-import FsLightbox from "fslightbox-react";
-import * as Icon from "react-feather";
+// import FsLightbox from "fslightbox-react";
+// import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
 import Layout from "../components/Layout";
 import Service from "../components/Service";
 // import Testimonial from "../components/Testimonial";
 
 function About() {
-  const [toggler, setToggler] = useState(false);
+  // const [toggler, setToggler] = useState(false);
   const [information, setInformation] = useState("");
   const [services, setServices] = useState([]);
   // const [reviews, setReviews] = useState([]);
@@ -36,11 +36,11 @@ function About() {
   //   ],
   // };
 
-  const handleToggler = (event) => {
-    setToggler({
-      toggler: !toggler,
-    });
-  };
+  // const handleToggler = (event) => {
+  //   setToggler({
+  //     toggler: !toggler,
+  //   });
+  // };
 
   useEffect(() => {
     axios.get("/api/information").then((response) => {
@@ -65,15 +65,15 @@ function About() {
                 <img
                   src={information.aboutImage}
                   alt="about"
-                  onClick={() => handleToggler(!toggler)}
+                  // onClick={() => handleToggler(!toggler)}
                 />
-                <span className="mi-about-image-icon">
+                {/* <span className="mi-about-image-icon">
                   <Icon.ZoomIn />
                 </span>
                 <FsLightbox
                   toggler={toggler}
                   sources={[information.aboutImageLg]}
-                />
+                /> */}
               </div>
             </div>
             <div className="col-lg-6">

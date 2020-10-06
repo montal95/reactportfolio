@@ -24,8 +24,8 @@ const database = {
     },
     // 300px x 300px
     brandImage: "/images/Sam-Montalvo.png",
-    aboutImage: "/images/about-image.jpg",
-    aboutImageLg: "/images/about-image-lg.jpg",
+    aboutImage: "/images/chicago-skyline-sm.png",
+    aboutImageLg: "/images/chicago-skyline-lg.png",
     cvfile: "/files/Sam-Montalvo-Jr-CV.pdf",
   },
   services: [
