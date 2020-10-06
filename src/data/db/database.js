@@ -4,7 +4,7 @@ const database = {
   information: {
     name: "Sam Montalvo Jr",
     aboutContent:
-      "I am a full stack software developer. I can provide clean and testable code. My passion is bringing your ideas to the screen",
+      "I am a full stack software developer. I can provide clean and testable code. My passion is bringing your ideas to the screen.",
     age: 29,
     phone: "214-686-7539",
     nationality: "American",
