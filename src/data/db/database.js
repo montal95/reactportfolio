@@ -117,24 +117,22 @@ const database = {
       largeImageUrl: ["/images/PITS-Image-LG.png"],
       url: "https://pits-pwa-tracking.netlify.app/",
     },
-    // {
-    //   id: 2,
-    //   title: "Coffee Mug",
-    //   subtitle: "Awesome coffee mug design.",
-    //   imageUrl: "/images/portfolio-image-4.jpg",
-    //   largeImageUrl: [
-    //     "/images/portfolio-image-4-lg.jpg",
-    //     "/images/portfolio-image-4-lg2.jpg"
-    //   ],
-    //   url: 'https://facebook.com'
-    // },
-    // {
-    //   id: 3,
-    //   title: "Tea & Coffee Mug",
-    //   subtitle: "Beautiful mug with logo.",
-    //   imageUrl: "/images/portfolio-image-2.jpg",
-    //   url: 'https://pinterest.com'
-    // },
+    {
+      id: 2,
+      title: "Flatbook",
+      subtitle: "Minimalist notetaking app.",
+      imageUrl: "/images/Flatbook-image-sm.png",
+      largeImageUrl: ["/images/Flatbook-image-lg.png"],
+      url: "https://flatbook-smj.netlify.app/",
+    },
+    {
+      id: 3,
+      title: "New Tetris",
+      subtitle: "A new twist on a classic game. Made from pure HTML/CSS and Vanilla Javascript",
+      imageUrl: "/images/Tetris-image-sm.png",
+      largeImageUrl: ["/images/Tetris-image-lg.png"],
+      url: 'https://tetrisnew3.herokuapp.com/'
+    },
   ],
   experience: {
     workingExperience: [
