@@ -111,6 +111,14 @@ const database = {
   portfolios: [
     {
       id: 1,
+      title: "Phasmophobia Notepad",
+      subtitle: "A Companion PWA mimics the same functionality of the journal in the game Phasmophobia",
+      imageUrl: "/images/PhasmoNotes.png",
+      largeImageUrl: ["/images/PhasmoNotes-lg.png"],
+      url: 'https://gbnotepad.netlify.app/'
+    },
+    {
+      id: 2,
       title: "PITS",
       subtitle: "A PWA to track your plant watering schedule.",
       imageUrl: "/images/PITS-Image-SM.png",
@@ -118,7 +126,7 @@ const database = {
       url: "https://pits-pwa-tracking.netlify.app/",
     },
     {
-      id: 2,
+      id: 3,
       title: "Flatbook",
       subtitle: "Minimalist notetaking app.",
       imageUrl: "/images/Flatbook-image-sm.png",
@@ -126,7 +134,7 @@ const database = {
       url: "https://flatbook-smj.netlify.app/",
     },
     {
-      id: 3,
+      id: 4,
       title: "New Tetris",
       subtitle: "A new twist on a classic game. Made from pure HTML/CSS and Vanilla Javascript",
       imageUrl: "/images/Tetris-image-sm.png",
