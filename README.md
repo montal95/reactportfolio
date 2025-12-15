@@ -1,24 +1,105 @@
 # React Portfolio
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a7fe4db5-e077-4f6c-ac6d-eb833ee81b12/deploy-status)](https://app.netlify.com/sites/gallant-hypatia-c82d23/deploys)
+
 A personal portfolio website built with React, showcasing projects, skills, and experience.
+
+**Live Site:** https://gallant-hypatia-c82d23.netlify.app
 
 ## Deployment
 
-### Hosting
-This site is hosted on **Netlify** with automatic continuous deployment.
+### Hosting on Netlify
 
-### DNS Management
-Domain DNS is managed through **Squarespace Domains** (formerly Google Domains).
+This site is hosted on **Netlify** with automatic continuous deployment from GitHub.
 
-### Deployment Procedure
+**Current Netlify Site:** gallant-hypatia-c82d23.netlify.app
+**Site ID:** a7fe4db5-e077-4f6c-ac6d-eb833ee81b12
+
+Netlify automatically detects and deploys updates whenever changes are pushed to the `main` branch on GitHub.
+
+#### Deployment Status Badge
+
+The badge at the top of this README shows the live status of the Netlify deployment:
+
+- **✓ Success** - Latest deploy succeeded
+- **⚠ Building** - Site is currently being deployed
+- **✗ Failed** - Latest deploy failed
+
+#### How Netlify Deployment Works
+
+Netlify is connected to the `montal95/reactportfolio` GitHub repository with the following configuration:
+
+- **GitHub Integration:** Direct connection to the repository
+- **Automatic Deployment:** Triggered on every push to the `main` branch
+- **Build Command:** `npm run build`
+- **Publish Directory:** `build/`
+- **Preview Deploys:** Automatically generated for pull requests
+
+The deployment is fully automated - push to GitHub, and Netlify handles the rest.
+
+#### Deployment Procedure
+
 1. Make your changes on a feature branch
 2. Test locally using `npm start`
 3. Push changes to the repository
 4. Create a pull request and merge to the `main` branch
 5. **Netlify automatically triggers a redeployment** when changes are pushed to the `main` branch
-6. The site will be live within a few minutes after the build completes
+6. Netlify runs `npm run build` to create the production build
+7. The site will be live within a few minutes after the build completes
 
 No manual deployment steps are required - Netlify handles everything automatically when the main branch is updated.
+
+#### Manual Deploy
+
+You can also trigger manual deploys via the Netlify Dashboard:
+1. Go to the **Deploys** tab
+2. Click "Trigger deploy" → "Deploy site"
+
+Or use the Netlify CLI:
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
+
+### DNS Configuration (Squarespace)
+
+The DNS for this site is managed through **Squarespace Domains** (formerly Google Domains).
+
+> **Note:** Google Domains was acquired by Squarespace in 2023. Existing domains were migrated to Squarespace management.
+
+#### Setting up Custom Domain on Netlify
+
+1. **Add custom domain in Netlify**
+   - Go to **Site Settings > Domain management**
+   - Click "Add custom domain"
+   - Enter your domain
+
+2. **Get Netlify DNS configuration**
+   - Netlify provides DNS records to configure
+   - Note the A Record IP and CNAME target
+
+3. **Configure DNS in Squarespace**
+   - Log into [Squarespace Domains](https://domains.squarespace.com)
+   - Select your domain
+   - Navigate to **DNS Settings**
+   - Add the records provided by Netlify:
+     - **A Record**: `@` → Netlify's IP
+     - **CNAME Record**: `www` → `gallant-hypatia-c82d23.netlify.app`
+
+4. **Wait for DNS propagation**
+   - DNS changes can take 24-48 hours to propagate globally
+
+5. **Enable HTTPS in Netlify**
+   - Go to **Site Settings > Domain management > HTTPS**
+   - Netlify automatically provisions a free SSL certificate via Let's Encrypt
+   - Enable "Force HTTPS" to redirect all HTTP traffic to HTTPS
+
+#### Squarespace Domain Management
+
+- **Access your domains:** https://domains.squarespace.com
+- **DNS Records:** Managed under DNS Settings for each domain
+- **Nameservers:** Can point to Netlify's nameservers for easier management (optional)
+- **Auto-renewal:** Ensure domain auto-renewal is enabled to prevent expiration
 
 ## Development
 
