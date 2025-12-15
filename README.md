@@ -1,4 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Portfolio
+
+A personal portfolio website built with React, showcasing projects, skills, and experience.
+
+## Deployment
+
+### Hosting
+This site is hosted on **Netlify** with automatic continuous deployment.
+
+### DNS Management
+Domain DNS is managed through **Squarespace Domains** (formerly Google Domains).
+
+### Deployment Procedure
+1. Make your changes on a feature branch
+2. Test locally using `npm start`
+3. Push changes to the repository
+4. Create a pull request and merge to the `main` branch
+5. **Netlify automatically triggers a redeployment** when changes are pushed to the `main` branch
+6. The site will be live within a few minutes after the build completes
+
+No manual deployment steps are required - Netlify handles everything automatically when the main branch is updated.
+
+## Development
+
+### Prerequisites
+- Node.js (v12 or higher recommended)
+- npm
+
+### Installation
+```bash
+npm install
+```
 
 ## Available Scripts
 
@@ -29,13 +60,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Learn More
 
