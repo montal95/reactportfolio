@@ -56,7 +56,10 @@ img {
     max-width: 100%;
 }
 
-@include placeholder-color($color-body);
+input,
+textarea {
+    @include placeholder-color($color-body);
+}
 
 h1,
 h2,
