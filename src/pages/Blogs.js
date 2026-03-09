@@ -18,7 +18,7 @@ function Blogs() {
       }
     });
     return () => mounted = false;
-  }, [posts]);
+  }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
