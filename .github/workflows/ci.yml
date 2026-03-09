@@ -6,63 +6,56 @@ on:
   pull_request:
     branches: [main, development]
 
-# Cancel in-progress runs for the same branch
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  DOCKER_IMAGE: node:20-alpine
-
 jobs:
-  test-and-build:
+  unit-tests:
+    name: Unit Tests & Build
     runs-on: ubuntu-latest
-    # Timeout after 15 minutes to prevent runaway builds
-    timeout-minutes: 15
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Cache Docker image
-        id: docker-cache
-        uses: actions/cache@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: /tmp/docker-image.tar
-          key: ${{ runner.os }}-docker-${{ env.DOCKER_IMAGE }}
+          node-version-file: '.nvmrc'
+          cache: 'npm'
 
-      - name: Load cached Docker image
-        if: steps.docker-cache.outputs.cache-hit == 'true'
-        run: docker load -i /tmp/docker-image.tar
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Pull and cache Docker image
-        if: steps.docker-cache.outputs.cache-hit != 'true'
-        run: |
-          docker pull ${{ env.DOCKER_IMAGE }}
-          docker save ${{ env.DOCKER_IMAGE }} -o /tmp/docker-image.tar
+      - name: Run unit tests
+        run: npm test -- --watchAll=false --passWithNoTests
 
-      - name: Cache node_modules
-        uses: actions/cache@v4
+      - name: Build
+        run: npm run build
+
+  e2e-tests:
+    name: Playwright E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: .node_modules_cache
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
+          node-version-file: '.nvmrc'
+          cache: 'npm'
 
-      - name: Run tests
-        run: docker compose --profile test run --rm test
-        env:
-          NODE_MODULES_PATH: ./.node_modules_cache
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run build
-        run: docker compose --profile build run --rm build
-        env:
-          NODE_MODULES_PATH: ./.node_modules_cache
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
 
-      - name: Upload build artifacts
+      - name: Run Playwright tests (local dev server)
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
         uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
         with:
-          name: build
-          path: build/
-          # Reduced from 7 to 3 days to save storage
-          retention-days: 3
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

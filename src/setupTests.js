@@ -1,12 +1,15 @@
 // Polyfill MutationObserver for older jsdom in react-scripts 3.x
 import 'mutationobserver-shim';
 
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// See: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Mock react-particles-js - it requires canvas which doesn't exist in jsdom
+// Mock react-particles-js — it uses canvas APIs not available in jsdom
 jest.mock('react-particles-js', () => {
+  const React = require('react');
   return function MockParticles() {
-    return null;
+    return React.createElement('div', { 'data-testid': 'mock-particles' });
   };
 });
 
@@ -27,7 +30,6 @@ beforeAll(() => {
     originalError.call(console, ...args);
   };
 });
-
 afterAll(() => {
   console.error = originalError;
 });

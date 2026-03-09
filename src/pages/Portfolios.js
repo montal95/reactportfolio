@@ -18,7 +18,7 @@ function Portfolios() {
       }
     });
     return () => mounted = false;
-  }, [portfolios]);
+  }, []);
 
   const indexOfLastPortfolios = currentPage * portfoliosPerPage;
   const indexOfFirstPortfolios = indexOfLastPortfolios - portfoliosPerPage;

@@ -5,11 +5,12 @@
 /.node_modules_cache
 /.pnp
 .pnp.js
-package-lock.json
-
 # testing
 /coverage
 test-output.txt
+/test-results/
+/playwright-report/
+/blob-report/
 
 # production
 /build
