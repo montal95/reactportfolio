@@ -5,8 +5,12 @@ const { test, expect } = require('@playwright/test');
  * Mobile Navigation E2E Tests
  *
  * Tests the hamburger menu toggle and navigation
- * on mobile viewports (Pixel 5 project in config).
+ * on mobile viewports. Uses an explicit viewport override
+ * so these tests work regardless of which Playwright project
+ * is active (chromium, firefox, mobile-chrome, etc.).
  */
+
+test.use({ viewport: { width: 393, height: 851 } }); // Pixel 5
 
 test.describe('Mobile Hamburger Menu', () => {
   test.beforeEach(async ({ page }) => {

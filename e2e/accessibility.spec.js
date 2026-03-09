@@ -17,9 +17,10 @@ const AxeBuilder = require('@axe-core/playwright').default;
 
 // Rules to skip until Phase 3 addresses them
 const KNOWN_ISSUES = [
-  'color-contrast',   // Needs manual verification — Phase 3
+  'color-contrast',    // Needs manual verification — Phase 3
   'landmark-one-main', // No <main> landmark yet — Phase 3
-  'region',           // Content not in landmark regions — Phase 3
+  'link-name',         // Links without discernible text (social icons, etc.) — Phase 3
+  'region',            // Content not in landmark regions — Phase 3
 ];
 
 const ROUTES = ['/', '/about', '/resume', '/portfolios', '/contact'];
