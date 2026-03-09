@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+# Cancel in-progress runs for the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOCKER_IMAGE: node:20-alpine
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    # Timeout after 15 minutes to prevent runaway builds
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache Docker image
+        id: docker-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker-image.tar
+          key: ${{ runner.os }}-docker-${{ env.DOCKER_IMAGE }}
+
+      - name: Load cached Docker image
+        if: steps.docker-cache.outputs.cache-hit == 'true'
+        run: docker load -i /tmp/docker-image.tar
+
+      - name: Pull and cache Docker image
+        if: steps.docker-cache.outputs.cache-hit != 'true'
+        run: |
+          docker pull ${{ env.DOCKER_IMAGE }}
+          docker save ${{ env.DOCKER_IMAGE }} -o /tmp/docker-image.tar
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: .node_modules_cache
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Run tests
+        run: docker compose --profile test run --rm test
+        env:
+          NODE_MODULES_PATH: ./.node_modules_cache
+
+      - name: Run build
+        run: docker compose --profile build run --rm build
+        env:
+          NODE_MODULES_PATH: ./.node_modules_cache
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build/
+          # Reduced from 7 to 3 days to save storage
+          retention-days: 3
