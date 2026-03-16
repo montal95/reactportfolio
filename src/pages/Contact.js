@@ -20,6 +20,13 @@ function Contact() {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
 
+  const requiredFields = [
+    { key: "name", label: "Name" },
+    { key: "email", label: "Email" },
+    { key: "subject", label: "Subject" },
+    { key: "message", label: "Message" },
+  ];
+
   const submitHandler = async (event) => {
     event.preventDefault();
     // Honeypot: hidden field filled only by bots — silently discard
@@ -29,39 +36,33 @@ function Contact() {
       setMessage("You message has been sent!!!");
       return;
     }
-    if (!formdata.name) {
+
+    const missing = requiredFields.find((field) => !formdata[field.key]);
+    if (missing) {
       setError(true);
-      setMessage("Name is required");
-    } else if (!formdata.email) {
-      setError(true);
-      setMessage("Email is required");
-    } else if (!formdata.subject) {
-      setError(true);
-      setMessage("Subject is required");
-    } else if (!formdata.message) {
-      setError(true);
-      setMessage("Message is required");
-    } else {
-      setError(false);
-      emailjs
-        .send(
-          process.env.REACT_APP_EMAILJS_SERVICE_ID,
-          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-          formdata,
-          process.env.REACT_APP_EMAILJS_USER_ID
-        )
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
-            setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
-            setMessage("You message has been sent!!!");
-          },
-          (err) => {
-            console.log("FAILED...", err);
-            setError(err);
-          }
-        );
+      setMessage(`${missing.label} is required`);
+      return;
     }
+
+    setError(false);
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formdata,
+        process.env.REACT_APP_EMAILJS_USER_ID
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
+          setMessage("You message has been sent!!!");
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          setError(err);
+        }
+      );
   };
   const handleChange = (event) => {
     setFormdata({
