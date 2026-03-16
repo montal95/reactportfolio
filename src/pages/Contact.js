@@ -15,45 +15,54 @@ function Contact() {
     email: "",
     subject: "",
     message: "",
+    website: "",
   });
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
 
+  const requiredFields = [
+    { key: "name", label: "Name" },
+    { key: "email", label: "Email" },
+    { key: "subject", label: "Subject" },
+    { key: "message", label: "Message" },
+  ];
+
   const submitHandler = async (event) => {
     event.preventDefault();
-    if (!formdata.name) {
-      setError(true);
-      setMessage("Name is required");
-    } else if (!formdata.email) {
-      setError(true);
-      setMessage("Email is required");
-    } else if (!formdata.subject) {
-      setError(true);
-      setMessage("Subject is required");
-    } else if (!formdata.message) {
-      setError(true);
-      setMessage("Message is required");
-    } else {
+    // Honeypot: hidden field filled only by bots — silently discard
+    if (formdata.website) {
       setError(false);
-      emailjs
-        .send(
-          process.env.REACT_APP_EMAILJS_SERVICE_ID,
-          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-          formdata,
-          process.env.REACT_APP_EMAILJS_USER_ID
-        )
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
-            setFormdata({ name: "", email: "", subject: "", message: "" });
-            setMessage("You message has been sent!!!");
-          },
-          (err) => {
-            console.log("FAILED...", err);
-            setError(err);
-          }
-        );
+      setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
+      setMessage("You message has been sent!!!");
+      return;
     }
+
+    const missing = requiredFields.find((field) => !formdata[field.key]);
+    if (missing) {
+      setError(true);
+      setMessage(`${missing.label} is required`);
+      return;
+    }
+
+    setError(false);
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formdata,
+        process.env.REACT_APP_EMAILJS_USER_ID
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
+          setMessage("You message has been sent!!!");
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          setError(err);
+        }
+      );
   };
   const handleChange = (event) => {
     setFormdata({
@@ -67,13 +76,9 @@ function Contact() {
   };
 
   const handleAlerts = () => {
-    if (error && message) {
-      return <div className="alert alert-danger mt-4">{message}</div>;
-    } else if (!error && message) {
-      return <div className="alert alert-success mt-4">{message}</div>;
-    } else {
-      return null;
-    }
+    if (!message) return null;
+    const alertType = error ? "alert-danger" : "alert-success";
+    return <div className={`alert ${alertType} mt-4`}>{message}</div>;
   };
 
   useEffect(() => {
@@ -144,6 +149,19 @@ function Contact() {
                       rows="6"
                       value={formdata.message}
                     ></textarea>
+                  </div>
+                  {/* Honeypot — hidden from humans, filled by bots */}
+                  <div className="mi-form-field mi-form-honeypot">
+                    <label htmlFor="contact-form-website">Website</label>
+                    <input
+                      onChange={handleChange}
+                      type="text"
+                      name="website"
+                      id="contact-form-website"
+                      value={formdata.website}
+                      tabIndex="-1"
+                      autoComplete="off"
+                    />
                   </div>
                   <div className="mi-form-field">
                     <button className="mi-button" type="submit">
