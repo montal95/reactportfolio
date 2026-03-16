@@ -15,12 +15,20 @@ function Contact() {
     email: "",
     subject: "",
     message: "",
+    website: "",
   });
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    // Honeypot: hidden field filled only by bots — silently discard
+    if (formdata.website) {
+      setError(false);
+      setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
+      setMessage("You message has been sent!!!");
+      return;
+    }
     if (!formdata.name) {
       setError(true);
       setMessage("Name is required");
@@ -45,7 +53,7 @@ function Contact() {
         .then(
           (response) => {
             console.log("SUCCESS!", response.status, response.text);
-            setFormdata({ name: "", email: "", subject: "", message: "" });
+            setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
             setMessage("You message has been sent!!!");
           },
           (err) => {
@@ -144,6 +152,19 @@ function Contact() {
                       rows="6"
                       value={formdata.message}
                     ></textarea>
+                  </div>
+                  {/* Honeypot — hidden from humans, filled by bots */}
+                  <div className="mi-form-field mi-form-honeypot">
+                    <label htmlFor="contact-form-website">Website</label>
+                    <input
+                      onChange={handleChange}
+                      type="text"
+                      name="website"
+                      id="contact-form-website"
+                      value={formdata.website}
+                      tabIndex="-1"
+                      autoComplete="off"
+                    />
                   </div>
                   <div className="mi-form-field">
                     <button className="mi-button" type="submit">
