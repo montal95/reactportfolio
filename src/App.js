@@ -9,8 +9,6 @@ import Blogs from "./pages/Blogs";
 import Contact from "./pages/Contact";
 import BlogDetails from "./pages/BlogDetails";
 import Notfound from "./pages/Notfound";
-import dotenv from "dotenv";
-dotenv.config();
 
 function App() {
   return (
