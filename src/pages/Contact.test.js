@@ -3,9 +3,9 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 // Import mock data setup - must be before component imports
-import './data';
+import '../data';
 
-import Contact from './pages/Contact';
+import Contact from './Contact';
 
 // Mock emailjs-com to prevent real API calls
 jest.mock('emailjs-com', () => ({
