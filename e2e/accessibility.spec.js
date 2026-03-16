@@ -6,21 +6,17 @@ const AxeBuilder = require('@axe-core/playwright').default;
  * Accessibility (a11y) E2E Tests
  *
  * Uses axe-core to run automated accessibility audits
- * against each major route. This establishes the baseline
- * that Phase 3 (Content & SEO) will improve upon.
+ * against each major route.
  *
- * Note: These tests will initially flag known issues
- * (missing landmarks, weak alt text, etc.) that are
- * documented in the audit. We disable specific rules
- * for now and track them as future fixes.
+ * Phase 3 resolved: landmark-one-main, link-name, region.
+ * Remaining known issue: color-contrast (needs manual
+ * verification against WCAG 2.1 AA — deferred to Phase 5
+ * or a dedicated design pass).
  */
 
-// Rules to skip until Phase 3 addresses them
+// Rules to skip until addressed in a future phase
 const KNOWN_ISSUES = [
-  'color-contrast',    // Needs manual verification — Phase 3
-  'landmark-one-main', // No <main> landmark yet — Phase 3
-  'link-name',         // Links without discernible text (social icons, etc.) — Phase 3
-  'region',            // Content not in landmark regions — Phase 3
+  'color-contrast',    // Needs manual verification — deferred
 ];
 
 const ROUTES = ['/', '/about', '/resume', '/portfolios', '/contact'];
