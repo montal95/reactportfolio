@@ -64,7 +64,7 @@ function About() {
               <div className="mi-about-image">
                 <img
                   src={information.aboutImage}
-                  alt="about"
+                  alt="Chicago skyline"
                   // onClick={() => handleToggler(!toggler)}
                 />
                 {/* <span className="mi-about-image-icon">

@@ -119,7 +119,7 @@ function Contact() {
                     </label>
                     <input
                       onChange={handleChange}
-                      type="text"
+                      type="email"
                       name="email"
                       id="contact-form-email"
                       value={formdata.email}
