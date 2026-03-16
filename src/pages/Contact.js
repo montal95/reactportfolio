@@ -76,13 +76,9 @@ function Contact() {
   };
 
   const handleAlerts = () => {
-    if (error && message) {
-      return <div className="alert alert-danger mt-4">{message}</div>;
-    } else if (!error && message) {
-      return <div className="alert alert-success mt-4">{message}</div>;
-    } else {
-      return null;
-    }
+    if (!message) return null;
+    const alertType = error ? "alert-danger" : "alert-success";
+    return <div className={`alert ${alertType} mt-4`}>{message}</div>;
   };
 
   useEffect(() => {
