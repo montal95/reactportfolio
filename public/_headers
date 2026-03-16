@@ -7,6 +7,8 @@
 # CSP allowlist rationale:
 #   - 'unsafe-inline' (script/style): Required by CRA 3.x runtime injection.
 #     Can be removed after migrating to Vite (Phase 5) with nonce support.
+#   - data: (font-src): CRA 3.x url-loader inlines LineIcons font files as
+#     base64 data URIs in the JS bundle. Without this, icon fonts are blocked.
 #   - fonts.googleapis.com / fonts.gstatic.com: Nunito font (typography.scss)
 #   - api.emailjs.com: Contact form submission (Contact.js)
 #   - *.disqus.com / *.disquscdn.com: Blog comment embed (BlogDetails.js)
@@ -26,4 +28,4 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
   # -- Content Security Policy --
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.disquscdn.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.disqus.com https://*.disquscdn.com https://referrer.disqus.com; connect-src 'self' https://api.emailjs.com https://*.disqus.com; frame-src https://disqus.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.disquscdn.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://*.disqus.com https://*.disquscdn.com https://referrer.disqus.com; connect-src 'self' https://api.emailjs.com https://*.disqus.com; frame-src https://disqus.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
