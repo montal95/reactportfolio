@@ -4,7 +4,7 @@
   "dependencies": {
     "axios": "^1.13.6",
     "axios-mock-adapter": "^1.22.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^5.3.8",
     "disqus-react": "^1.0.7",
     "fslightbox-react": "^1.4.0",
     "react": "^16.9.0",
