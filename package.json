@@ -2,8 +2,8 @@
   "name": "react-portfolio",
   "version": "2.2.0",
   "dependencies": {
-    "axios": "^0.19.0",
-    "axios-mock-adapter": "^1.17.0",
+    "axios": "^1.13.6",
+    "axios-mock-adapter": "^1.22.0",
     "bootstrap": "^4.3.1",
     "disqus-react": "^1.0.7",
     "fslightbox-react": "^1.4.0",
@@ -51,5 +51,10 @@
   },
   "overrides": {
     "htmlparser2": "6.1.0"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ]
   }
 }
