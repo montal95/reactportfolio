@@ -3,10 +3,8 @@ import axios from "axios";
 import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
 import Layout from "../components/Layout";
-import emailjs from "emailjs-com";
 
 function Contact() {
-  // console.log(process.env.REACT_APP_EMAILJS_SERVICE_ID);
   const [phoneNumbers, setPhoneNumbers] = useState([]);
   const [emailAddress, setEmailAddress] = useState([]);
   const [address, setAddress] = useState([]);
@@ -45,24 +43,30 @@ function Contact() {
     }
 
     setError(false);
-    emailjs
-      .send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-        formdata,
-        process.env.REACT_APP_EMAILJS_USER_ID
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
-          setMessage("You message has been sent!!!");
-        },
-        (err) => {
-          console.log("FAILED...", err);
-          setError(err);
-        }
-      );
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          name: formdata.name,
+          email: formdata.email,
+          subject: formdata.subject,
+          message: formdata.message,
+          website: formdata.website,
+        }).toString(),
+      });
+      if (response.ok) {
+        setFormdata({ name: "", email: "", subject: "", message: "", website: "" });
+        setMessage("You message has been sent!!!");
+      } else {
+        setError(true);
+        setMessage("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError(true);
+      setMessage("Something went wrong. Please try again.");
+    }
   };
   const handleChange = (event) => {
     setFormdata({
@@ -103,6 +107,7 @@ function Contact() {
                   className="mi-form mi-contact-form"
                   onSubmit={submitHandler}
                 >
+                  <input type="hidden" name="form-name" value="contact" />
                   <div className="mi-form-field">
                     <label htmlFor="contact-form-name">Enter your name*</label>
                     <input
