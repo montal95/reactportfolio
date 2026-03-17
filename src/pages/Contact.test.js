@@ -7,12 +7,8 @@ import '../data';
 
 import Contact from './Contact';
 
-// Mock emailjs-com to prevent real API calls
-jest.mock('emailjs-com', () => ({
-  send: jest.fn(),
-}));
-
-import emailjs from 'emailjs-com';
+// Mock global fetch to prevent real network calls
+global.fetch = jest.fn();
 
 // Helper to render Contact with router context
 const renderContact = () => {
@@ -51,6 +47,15 @@ beforeEach(() => {
 });
 
 describe('Contact Form — Honeypot', () => {
+  it('renders the hidden form-name input for Netlify Forms', async () => {
+    renderContact();
+    await waitFor(() => {
+      const hiddenInput = document.querySelector('input[name="form-name"]');
+      expect(hiddenInput).not.toBeNull();
+      expect(hiddenInput).toHaveAttribute('value', 'contact');
+    });
+  });
+
   it('renders the honeypot field with the hiding class', async () => {
     renderContact();
     await waitFor(() => {
@@ -96,12 +101,12 @@ describe('Contact Form — Honeypot', () => {
       expect(screen.getByText(/You message has been sent/i)).toBeInTheDocument();
     });
 
-    // But EmailJS should NOT have been called
-    expect(emailjs.send).not.toHaveBeenCalled();
+    // But fetch should NOT have been called
+    expect(fetch).not.toHaveBeenCalled();
   });
 
-  it('sends email via EmailJS when honeypot is empty (real user)', async () => {
-    emailjs.send.mockResolvedValue({ status: 200, text: 'OK' });
+  it('submits via Netlify Forms fetch when honeypot is empty (real user)', async () => {
+    fetch.mockResolvedValue({ ok: true });
     renderContact();
     await waitFor(() => {
       expect(screen.getByLabelText(/Enter your name/i)).toBeInTheDocument();
@@ -112,8 +117,17 @@ describe('Contact Form — Honeypot', () => {
     fireEvent.click(screen.getByRole('button', { name: /Send Mail/i }));
 
     await waitFor(() => {
-      expect(emailjs.send).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledTimes(1);
     });
+
+    expect(fetch).toHaveBeenCalledWith(
+      '/',
+      expect.objectContaining({
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: expect.stringContaining('form-name=contact'),
+      })
+    );
 
     await waitFor(() => {
       expect(screen.getByText(/You message has been sent/i)).toBeInTheDocument();
@@ -134,7 +148,7 @@ describe('Contact Form — Validation', () => {
       expect(screen.getByText(/Name is required/i)).toBeInTheDocument();
     });
 
-    expect(emailjs.send).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it('shows error when email is empty', async () => {
@@ -151,7 +165,7 @@ describe('Contact Form — Validation', () => {
       expect(screen.getByText(/Email is required/i)).toBeInTheDocument();
     });
 
-    expect(emailjs.send).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it('shows error when subject is empty', async () => {
@@ -168,7 +182,7 @@ describe('Contact Form — Validation', () => {
       expect(screen.getByText(/Subject is required/i)).toBeInTheDocument();
     });
 
-    expect(emailjs.send).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it('shows error when message is empty', async () => {
@@ -189,6 +203,6 @@ describe('Contact Form — Validation', () => {
       expect(screen.getByText(/Message is required/i)).toBeInTheDocument();
     });
 
-    expect(emailjs.send).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
   });
 });
