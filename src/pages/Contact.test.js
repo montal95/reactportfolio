@@ -133,6 +133,59 @@ describe('Contact Form — Honeypot', () => {
       expect(screen.getByText(/You message has been sent/i)).toBeInTheDocument();
     });
   });
+
+  it('clears all form fields after successful submission', async () => {
+    fetch.mockResolvedValue({ ok: true });
+    renderContact();
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Enter your name/i)).toBeInTheDocument();
+    });
+
+    fillForm(validFormData);
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Mail/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/You message has been sent/i)).toBeInTheDocument();
+    });
+
+    expect(screen.getByLabelText(/Enter your name/i)).toHaveValue('');
+    expect(screen.getByLabelText(/Enter your email/i)).toHaveValue('');
+    expect(screen.getByLabelText(/Enter your subject/i)).toHaveValue('');
+    expect(screen.getByLabelText(/Enter your Message/i)).toHaveValue('');
+  });
+
+  it('shows error message when server returns a non-ok response', async () => {
+    fetch.mockResolvedValue({ ok: false });
+    renderContact();
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Enter your name/i)).toBeInTheDocument();
+    });
+
+    fillForm(validFormData);
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Mail/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows error message when fetch throws a network error', async () => {
+    fetch.mockRejectedValue(new Error('Network failure'));
+    renderContact();
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Enter your name/i)).toBeInTheDocument();
+    });
+
+    fillForm(validFormData);
+
+    fireEvent.click(screen.getByRole('button', { name: /Send Mail/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
+    });
+  });
 });
 
 describe('Contact Form — Validation', () => {
