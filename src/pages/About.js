@@ -64,7 +64,7 @@ function About() {
               <div className="mi-about-image">
                 <img
                   src={information.aboutImage}
-                  alt="about"
+                  alt="Chicago skyline"
                   // onClick={() => handleToggler(!toggler)}
                 />
                 {/* <span className="mi-about-image-icon">
@@ -82,8 +82,7 @@ function About() {
                   I am <span className="color-theme">{information.name}</span>
                 </h3>
                 <p>
-                  I am a full stack software developer. I can provide clean and
-                  testable code. My passion is bringing your ideas to the screen
+                  {information.aboutContent}
                 </p>
                 <ul>
                   {!information.name ? null : (

@@ -18,7 +18,7 @@ function Header() {
   }, []);
 
   return (
-    <nav className={navigationToggler ? "mi-header is-visible" : "mi-header"}>
+    <nav aria-label="Main navigation" className={navigationToggler ? "mi-header is-visible" : "mi-header"}>
       <button onClick={handleNavigationToggler} className="mi-header-toggler">
         {!navigationToggler ? (
           <LineIcon name="menu" />
@@ -29,7 +29,7 @@ function Header() {
       <div className="mi-header-inner">
         <div className="mi-header-image">
           <Link to="/">
-            <img src={information.brandImage} alt="brandimage" />
+            <img src={information.brandImage} alt="Sam Montalvo Jr — portrait" />
           </Link>
         </div>
 

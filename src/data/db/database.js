@@ -1,11 +1,22 @@
 import Mock from "../mock";
 
+function getAge(birthdate) {
+  const today = new Date();
+  const birth = new Date(birthdate);
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
+}
+
 const database = {
   information: {
     name: "Sam Montalvo Jr",
     aboutContent:
-      "I am a full stack software developer. I can provide clean and testable code. My passion is bringing your ideas to the screen.",
-    age: 29,
+      "Full-stack software engineer with roots in web development dating to 2012. Core strengths in Rails application development, legacy system modernization, and CI/CD pipeline implementation. Bilingual in English and Spanish.",
+    age: getAge("1991-05-13"),
     phone: "214-686-7539",
     nationality: "American",
     language: "English, Spanish",
@@ -14,7 +25,7 @@ const database = {
     freelanceStatus: "Available",
     socialLinks: {
       facebook: "",
-      twitter: "https://twitter.com/SamMontalvo7",
+      twitter: "https://x.com/SamMontalvo7",
       pinterest: "",
       behance: "",
       linkedin: "https://www.linkedin.com/in/samuel-montalvo-jr/",
@@ -139,52 +150,69 @@ const database = {
       subtitle: "A new twist on a classic game. Made from pure HTML/CSS and Vanilla Javascript",
       imageUrl: "/images/Tetris-image-sm.png",
       largeImageUrl: ["/images/Tetris-image-lg.png"],
-      url: 'https://tetrisnew3.herokuapp.com/'
+      url: 'https://tetrisnew3.herokuapp.com/' // TODO: replace with re-hosted URL (Heroku free tier sunset Nov 2022)
     },
   ],
   experience: {
     workingExperience: [
       {
         id: 1,
+        year: "2021 - 2025",
+        position: "Application Developer",
+        company: "Select Rehabilitation",
+        details:
+          "Built features for the Access Manager Rails application within a 10,000+ employee healthcare organization across 46 states. Drove legacy modernization from PHP/Laravel/AngularJS to Ruby on Rails.",
+      },
+      {
+        id: 2,
+        year: "2021 - 2025",
+        position: "Freelance Software Developer",
+        company: "Upwork",
+        details:
+          "Delivered web development projects across multiple client engagements using Rails, React, and JavaScript ecosystems.",
+      },
+      {
+        id: 3,
         year: "2019 - 2020",
         position: "Technical Support",
         company: "Personal Creations",
         details: "",
       },
       {
-        id: 2,
+        id: 4,
         year: "2016 - 2019",
         position: "Electrician",
         company: "Samm's Electric",
         details: "",
       },
       {
-        id: 3,
-        year: "2012 - 1016",
+        id: 5,
+        year: "2012 - 2016",
         position: "Web Content Developer",
         company: "Mauri Pro Sailing",
-        details: "",
+        details:
+          "Managed a product database of 20,000+ items and built SEO-optimized product pages. Mentored interns on web content workflows.",
       },
     ],
     educationExperience: [
       {
         id: 1,
         year: "2020",
-        graduation: "Software Engineering Bootcamp",
+        graduation: "Full-Stack Software Development",
         university: "Flatiron School",
-        details: "",
+        details: "Ruby on Rails & JavaScript",
       },
       {
         id: 2,
         year: "2009 - 2012",
-        graduation: "Bachelor of Psychology",
+        graduation: "Bachelor of Arts in Psychology",
         university: "University of North Texas",
         details: "",
       },
       {
         id: 3,
         year: "2009",
-        graduation: "High School Graduation",
+        graduation: "High School Diploma",
         university: "Lake Dallas High School",
         details: "",
       },

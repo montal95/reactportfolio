@@ -2,6 +2,32 @@
  * Utilities
  */
 
+.mi-skip-to-content {
+   position: absolute;
+   left: -9999px;
+   top: auto;
+   width: 1px;
+   height: 1px;
+   overflow: hidden;
+   z-index: 9999;
+
+   &:focus {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: auto;
+      height: auto;
+      padding: 10px 20px;
+      background: $color-theme;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 4px;
+      outline: 2px solid #fff;
+   }
+}
+
 .mi-wrapper {
    padding-left: 300px;
    position: relative;
