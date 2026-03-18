@@ -1,0 +1,27 @@
+// Bootstrap selective imports — only load what the site actually uses.
+// Full bootstrap.min.css (270 KB) replaced with targeted module imports.
+//
+// Bootstrap classes in use:
+//   Grid:     container, row, col-*, justify-content-center
+//   Spacing:  mt-4, mt-5
+//   Alerts:   alert, alert-danger, alert-success
+//   Text:     text-center
+
+// Required foundation (always needed first)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Grid system
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// Alerts (used in Contact form)
+@import "bootstrap/scss/alert";
+
+// Utility classes (mt-*, text-center, justify-content-center, etc.)
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
