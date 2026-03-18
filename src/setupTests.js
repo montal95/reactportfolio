@@ -5,18 +5,17 @@ import 'mutationobserver-shim';
 // See: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Mock @tsparticles/react and @tsparticles/slim — canvas APIs not available in jsdom
-jest.mock('@tsparticles/react', () => {
+// Mock react-tsparticles and tsparticles-slim — canvas APIs not available in jsdom
+jest.mock('react-tsparticles', () => {
   const React = require('react');
   return {
     __esModule: true,
     default: function MockParticles() {
       return React.createElement('div', { 'data-testid': 'mock-particles' });
     },
-    initParticlesEngine: jest.fn(() => Promise.resolve()),
   };
 });
-jest.mock('@tsparticles/slim', () => ({
+jest.mock('tsparticles-slim', () => ({
   __esModule: true,
   loadSlim: jest.fn(() => Promise.resolve()),
 }));

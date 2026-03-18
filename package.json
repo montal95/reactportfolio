@@ -2,8 +2,6 @@
   "name": "react-portfolio",
   "version": "2.2.0",
   "dependencies": {
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.9.1",
     "axios": "^1.13.6",
     "axios-mock-adapter": "^1.22.0",
     "bootstrap": "^5.3.8",
@@ -19,8 +17,10 @@
     "react-router-dom": "^6.30.3",
     "react-scripts": "^3.4.3",
     "react-slick": "^0.25.2",
+    "react-tsparticles": "^2.12.2",
     "shave": "^2.5.6",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tsparticles-slim": "^2.12.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

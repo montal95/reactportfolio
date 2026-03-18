@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from 'axios';
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+import Particles from "react-tsparticles";
+import { loadSlim } from "tsparticles-slim";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
 function Home(){
   const [information, setInformation] = useState("");
-  const [particlesInit, setParticlesInit] = useState(false);
+
+  const initParticles = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
 
   const particleOptions = {
     particles: {
@@ -42,14 +45,6 @@ function Home(){
       }
     }
   };
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setParticlesInit(true);
-    });
-  }, []);
-
   useEffect(() =>{
     axios.get('/api/information')
     .then( response => {
@@ -59,13 +54,12 @@ function Home(){
   return (
     <Layout>
       <div className="mi-home-area mi-padding-section">
-        {particlesInit && (
-          <Particles
-            id="tsparticles"
-            className="mi-home-particle"
-            options={particleOptions}
-          />
-        )}
+        <Particles
+          id="tsparticles"
+          className="mi-home-particle"
+          init={initParticles}
+          options={particleOptions}
+        />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
