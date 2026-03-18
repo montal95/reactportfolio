@@ -35,7 +35,7 @@ function Header() {
 
         <ul className="mi-header-menu">
           <li>
-            <NavLink exact to="/">
+            <NavLink to="/">
               <span>Home</span>
             </NavLink>
           </li>

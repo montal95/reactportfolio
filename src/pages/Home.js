@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 
 function Home(){
   const [information, setInformation] = useState("");
+
   const paramConfig = {
     particles: {
       number: {
