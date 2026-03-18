@@ -8,7 +8,7 @@ import '../data';
 import Contact from './Contact';
 
 // Mock global fetch to prevent real network calls
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 // Renders Contact and waits until the form is ready
 const renderAndWait = async () => {
@@ -51,7 +51,7 @@ const validFormData = {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('Contact Form — Honeypot', () => {
