@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Particles from "react-particles-js";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
 function Home(){
   const [information, setInformation] = useState("");
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => setInit(true));
+  }, []);
+
+  useEffect(() =>{
+    axios.get('/api/information')
+    .then( response => {
+      setInformation(response.data);
+    })
+  }, [])
 
   const paramConfig = {
     particles: {
@@ -24,32 +39,32 @@ function Home(){
       size: {
         value: 5,
         random: true,
-        anim: {
+        animation: {
           speed: 4,
-          size_min: 0.3
+          minimumValue: 0.3
         }
       },
-      line_linked: {
+      links: {
         enable: false
       },
       move: {
         random: true,
         speed: 1,
         direction: "top",
-        out_mode: "out"
+        outModes: { default: "out" }
       }
     }
   };
-  useEffect(() =>{
-    axios.get('/api/information')
-    .then( response => {
-      setInformation(response.data);
-    })
-  }, [])
+
   return (
     <Layout>
       <div className="mi-home-area mi-padding-section">
-        <Particles className="mi-home-particle" params={paramConfig} />
+        {init && (
+          <Particles
+            className="mi-home-particle"
+            options={paramConfig}
+          />
+        )}
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">

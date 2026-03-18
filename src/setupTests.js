@@ -27,16 +27,14 @@ vi.mock('axios', () => {
   return { default: mockAxios, ...mockAxios };
 });
 
-// Mock react-particles-js — canvas APIs not available in jsdom
-// Phase 5: migrate to @tsparticles/react in Group C once Vite is stable
-vi.mock('react-particles-js', () => {
-  return {
-    default: function MockParticles() {
-      const React = require('react');
-      return React.createElement('div', { 'data-testid': 'mock-particles' });
-    }
-  };
-});
+// Mock @tsparticles/react and @tsparticles/slim — canvas APIs not available in jsdom
+vi.mock('@tsparticles/react', () => ({
+  default: () => null,
+  initParticlesEngine: vi.fn().mockResolvedValue(undefined),
+}));
+vi.mock('@tsparticles/slim', () => ({
+  loadSlim: vi.fn().mockResolvedValue(undefined),
+}));
 
 // Suppress console.error for known React testing warnings
 // These are caused by async state updates after tests complete
