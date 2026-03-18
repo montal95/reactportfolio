@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Particles from "react-particles-js";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
 function Home(){
   const [information, setInformation] = useState("");
-  const paramConfig = {
+  const [particlesInit, setParticlesInit] = useState(false);
+
+  const particleOptions = {
     particles: {
       number: {
         value: 160,
@@ -23,22 +26,30 @@ function Home(){
       size: {
         value: 5,
         random: true,
-        anim: {
+        animation: {
           speed: 4,
-          size_min: 0.3
+          minimumValue: 0.3
         }
       },
-      line_linked: {
+      links: {
         enable: false
       },
       move: {
         random: true,
         speed: 1,
         direction: "top",
-        out_mode: "out"
+        outModes: { default: "out" }
       }
     }
   };
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setParticlesInit(true);
+    });
+  }, []);
+
   useEffect(() =>{
     axios.get('/api/information')
     .then( response => {
@@ -48,7 +59,13 @@ function Home(){
   return (
     <Layout>
       <div className="mi-home-area mi-padding-section">
-        <Particles className="mi-home-particle" params={paramConfig} />
+        {particlesInit && (
+          <Particles
+            id="tsparticles"
+            className="mi-home-particle"
+            options={particleOptions}
+          />
+        )}
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
