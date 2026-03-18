@@ -4,7 +4,7 @@ function Sectiontitle(props) {
   return (
     <div className="mi-sectiontitle">
       <h2>{props.title}</h2>
-      <span>{props.title}</span>
+      <span aria-hidden="true">{props.title}</span>
     </div>
   );
 }
