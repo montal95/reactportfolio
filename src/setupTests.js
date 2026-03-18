@@ -5,20 +5,17 @@ import 'mutationobserver-shim';
 // See: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Mock react-tsparticles and tsparticles-slim — canvas APIs not available in jsdom
-jest.mock('react-tsparticles', () => {
+// Mock react-particles-js — canvas APIs not available in jsdom
+// TODO: Migrate to react-tsparticles v2 or @tsparticles/react v3 in Phase 5 (Vite).
+// Both tsparticles v2 and v3 ship ESM builds with ES2021 syntax (??= operator) that
+// CRA 3.x / Webpack 4 cannot transpile from node_modules. react-particles-js ships
+// a pre-bundled UMD build that works cleanly under CRA 3.x.
+jest.mock('react-particles-js', () => {
   const React = require('react');
-  return {
-    __esModule: true,
-    default: function MockParticles() {
-      return React.createElement('div', { 'data-testid': 'mock-particles' });
-    },
+  return function MockParticles() {
+    return React.createElement('div', { 'data-testid': 'mock-particles' });
   };
 });
-jest.mock('tsparticles-slim', () => ({
-  __esModule: true,
-  loadSlim: jest.fn(() => Promise.resolve()),
-}));
 
 // Suppress console.error for known React testing warnings
 // These are caused by async state updates after tests complete

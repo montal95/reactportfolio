@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
+import Particles from "react-particles-js";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
 function Home(){
   const [information, setInformation] = useState("");
 
-  const initParticles = useCallback(async (engine) => {
-    await loadSlim(engine);
-  }, []);
-
-  const particleOptions = {
+  const paramConfig = {
     particles: {
       number: {
         value: 160,
@@ -29,19 +24,19 @@ function Home(){
       size: {
         value: 5,
         random: true,
-        animation: {
+        anim: {
           speed: 4,
-          minimumValue: 0.3
+          size_min: 0.3
         }
       },
-      links: {
+      line_linked: {
         enable: false
       },
       move: {
         random: true,
         speed: 1,
         direction: "top",
-        outModes: { default: "out" }
+        out_mode: "out"
       }
     }
   };
@@ -54,12 +49,7 @@ function Home(){
   return (
     <Layout>
       <div className="mi-home-area mi-padding-section">
-        <Particles
-          id="tsparticles"
-          className="mi-home-particle"
-          init={initParticles}
-          options={particleOptions}
-        />
+        <Particles className="mi-home-particle" params={paramConfig} />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-12">
