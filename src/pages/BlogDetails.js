@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown/with-html";
 import axios from "axios";
 import Disqus from "disqus-react";
 import Layout from "../components/Layout";
 
-function BlogDetails(props) {
+function BlogDetails() {
+  const { id: blogId, title: blogFile } = useParams();
   const [content, setContent] = useState("");
-  const blogId = props.match.params.id;
-  const blogFile = props.match.params.title;
 
   useEffect(() => {
     axios
@@ -15,7 +15,7 @@ function BlogDetails(props) {
       .then(result => {
         setContent(result.data);
       })
-  }, [content, blogFile]);
+  }, [blogFile]);
 
   const disqusShortname = "chester-react"; //found in your Disqus.com dashboard
   const disqusConfig = {
