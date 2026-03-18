@@ -8,12 +8,12 @@ RUN addgroup -g 1001 -S appgroup && \
     adduser -u 1001 -S appuser -G appgroup
 
 # Copy pre-built assets
-COPY --chown=appuser:appgroup build ./build
+COPY --chown=appuser:appgroup dist ./dist
 
 # Switch to non-root user
 USER appuser
 
-WORKDIR /app/build
+WORKDIR /app/dist
 
 # Expose port
 EXPOSE 3000

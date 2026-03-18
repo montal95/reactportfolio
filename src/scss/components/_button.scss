@@ -6,7 +6,7 @@
   position: relative;
   padding: 0 30px;
   background: $color-theme;
-  color: #ffffff;
+  color: $color-bg-body;
   border: 0;
   display: inline-block;
   z-index: 1;
@@ -33,7 +33,7 @@
   }
 
   &:hover {
-    color: #ffffff;
+    color: $color-bg-body;
   }
 
   &:hover::before {

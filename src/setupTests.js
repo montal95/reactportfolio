@@ -1,21 +1,40 @@
-// Polyfill MutationObserver for older jsdom in react-scripts 3.x
-import 'mutationobserver-shim';
-
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
 // See: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Mock react-particles-js — canvas APIs not available in jsdom
-// TODO: Migrate to react-tsparticles v2 or @tsparticles/react v3 in Phase 5 (Vite).
-// Both tsparticles v2 and v3 ship ESM builds with ES2021 syntax (??= operator) that
-// CRA 3.x / Webpack 4 cannot transpile from node_modules. react-particles-js ships
-// a pre-bundled UMD build that works cleanly under CRA 3.x.
-jest.mock('react-particles-js', () => {
-  const React = require('react');
-  return function MockParticles() {
-    return React.createElement('div', { 'data-testid': 'mock-particles' });
+// Mock axios globally — components fire axios requests on mount but jsdom
+// has no server to respond to. Without this, every component test produces
+// unhandled errors that cause Vitest to exit with code 1 even when all
+// assertions pass.
+// Return sensible empty shapes that match what components destructure.
+vi.mock('axios', () => {
+  const mockAxios = {
+    get: vi.fn().mockResolvedValue({
+      data: {
+        // information endpoint (Header, Home, About, Socialicons)
+        socialLinks: {},
+        // all other endpoints return empty arrays/objects by default
+      }
+    }),
+    post: vi.fn().mockResolvedValue({ data: {} }),
+    create: vi.fn().mockReturnThis(),
+    interceptors: {
+      request: { use: vi.fn() },
+      response: { use: vi.fn() },
+    },
+    defaults: { headers: { common: {} } },
   };
+  return { default: mockAxios, ...mockAxios };
 });
+
+// Mock @tsparticles/react and @tsparticles/slim — canvas APIs not available in jsdom
+vi.mock('@tsparticles/react', () => ({
+  default: () => null,
+  initParticlesEngine: vi.fn().mockResolvedValue(undefined),
+}));
+vi.mock('@tsparticles/slim', () => ({
+  loadSlim: vi.fn().mockResolvedValue(undefined),
+}));
 
 // Suppress console.error for known React testing warnings
 // These are caused by async state updates after tests complete
@@ -37,3 +56,4 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError;
 });
+
