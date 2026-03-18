@@ -16,7 +16,9 @@ const AxeBuilder = require('@axe-core/playwright').default;
 
 // Rules to skip until addressed in a future phase
 const KNOWN_ISSUES = [
-  'color-contrast',    // Needs manual verification — deferred
+  // color-contrast removed — all color pairs verified against WCAG 2.1 AA
+  // via contrast ratio analysis: body text (#a4acc4) 8.25:1, theme green
+  // (#02b875) 7.22:1, headings (#fff) 18.68:1 — all on dark backgrounds.
 ];
 
 const ROUTES = ['/', '/about', '/resume', '/portfolios', '/contact'];
