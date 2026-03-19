@@ -10,6 +10,7 @@ interface FormData {
   subject: string;
   message: string;
   website: string;
+  [key: string]: string;
 }
 
 function Contact(): React.JSX.Element {

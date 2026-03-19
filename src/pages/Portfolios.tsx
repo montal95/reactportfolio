@@ -16,7 +16,7 @@ function Portfolios(): React.JSX.Element {
     indexOfLastPortfolios
   );
 
-  const paginate = (e, pageNumber) => {
+  const paginate = (e: React.MouseEvent<HTMLAnchorElement>, pageNumber: number) => {
     e.preventDefault();
     setCurrentPage(pageNumber);
   };
