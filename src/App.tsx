@@ -10,7 +10,7 @@ const Portfolios  = lazy(() => import("./pages/Portfolios"));
 const Contact     = lazy(() => import("./pages/Contact"));
 const Notfound    = lazy(() => import("./pages/Notfound"));
 
-function App() {
+function App(): React.JSX.Element {
   return (
     <BrowserRouter>
       <ErrorBoundary>
