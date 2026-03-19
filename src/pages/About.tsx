@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { information, services } from "../data/db/database";
 // import Slider from "react-slick";
 // import FsLightbox from "fslightbox-react";
 // import * as Icon from "react-feather";
@@ -8,11 +8,8 @@ import Layout from "../components/Layout";
 import Service from "../components/Service";
 // import Testimonial from "../components/Testimonial";
 
-function About() {
+function About(): React.JSX.Element {
   // const [toggler, setToggler] = useState(false);
-  const [information, setInformation] = useState("");
-  const [services, setServices] = useState([]);
-  // const [reviews, setReviews] = useState([]);
 
   // const sliderSettings = {
   //   dots: false,
@@ -41,18 +38,6 @@ function About() {
   //     toggler: !toggler,
   //   });
   // };
-
-  useEffect(() => {
-    axios.get("/api/information").then((response) => {
-      setInformation(response.data);
-    });
-    axios.get("/api/services").then((response) => {
-      setServices(response.data);
-    });
-    // axios.get("/api/reviews").then((response) => {
-    //   setReviews(response.data);
-    // });
-  }, []);
 
   return (
     <Layout>

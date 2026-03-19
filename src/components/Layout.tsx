@@ -2,7 +2,11 @@ import React from "react";
 import Header from "./Header";
 import BackgroundLines from "./BackgroundLines";
 
- function Layout(props){
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+function Layout({ children }: LayoutProps): React.JSX.Element {
   return (
     <div className="mi-wrapper">
       <a className="mi-skip-to-content" href="#main-content">
@@ -11,7 +15,7 @@ import BackgroundLines from "./BackgroundLines";
       <BackgroundLines />
       <Header />
       <main id="main-content">
-        {props.children}
+        {children}
       </main>
     </div>
   );

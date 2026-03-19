@@ -2,9 +2,9 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a7fe4db5-e077-4f6c-ac6d-eb833ee81b12/deploy-status)](https://app.netlify.com/sites/gallant-hypatia-c82d23/deploys)
 [![CI](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-2.3.0-blue)](https://github.com/montal95/reactportfolio/releases)
+[![Version](https://img.shields.io/badge/version-4.0.0-blue)](https://github.com/montal95/reactportfolio/releases)
 
-Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) — built with React, deployed on Netlify, and actively modernized through a structured upgrade plan.
+Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) — built with React 18 and TypeScript, deployed on Netlify, and modernized through a structured six-phase upgrade plan.
 
 ---
 
@@ -12,41 +12,46 @@ Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) �
 
 | Layer | Technology |
 |---|---|
-| UI | React 16.9 · React Router 6 · Bootstrap 5 · SCSS |
-| Build | Create React App 3.4.3 (Vite migration planned) |
+| UI | React 18 · React Router 6 · Bootstrap 5.3 (tree-shaken) · SCSS |
+| Language | TypeScript (strict mode) · JSX via Vite OXC transformer |
+| Build | Vite 8 · @vitejs/plugin-react |
+| Particles | @tsparticles/react v3 · @tsparticles/slim |
 | Hosting | Netlify (continuous deployment from `main`) |
-| Testing | React Testing Library · Playwright · axe-core |
+| Testing | Vitest · React Testing Library · Playwright · axe-core |
 | CI/CD | GitHub Actions |
 
 ---
 
 ## What's in Here
 
-Beyond a typical CRA starter, this repo includes:
+Beyond a basic portfolio, this repo includes:
 
-- **Security headers** via `public/_headers` — Content Security Policy, X-Frame-Options, Referrer-Policy, Permissions-Policy
-- **Contact form spam protection** — honeypot field with offscreen CSS, `tabIndex="-1"`, and `autoComplete="off"`
-- **17 unit tests** covering app rendering, navigation, contact form validation, bot detection, and honeypot behavior
-- **Playwright E2E tests** for desktop navigation, mobile hamburger menu (Pixel 5 viewport), and all route links
-- **axe-core accessibility baseline** on every route — only `color-contrast` is intentionally deferred
-- **Three GitHub Actions workflows** — CI (`ci.yml`), Netlify deploy preview E2E (`e2e-preview.yml`), and auto-release (`release.yml`)
-- **SEO meta layer** — Open Graph, Twitter Card, `meta description`, `sitemap.xml`, `robots.txt`
-- **Accessibility landmarks** — `<main>` landmark, `aria-label` on nav and all social icon links, skip-to-content link, descriptive `alt` attributes
-- **Netlify Forms** contact submission (no third-party SDK, no API keys in the bundle)
+- **TypeScript strict mode** — all source files converted to `.tsx`/`.ts`; `tsc --noEmit` is a required CI gate
+- **React 18** — `createRoot` API; concurrent mode enabled
+- **Vite 8 build** — route-level code splitting via `React.lazy`, replaces legacy CRA 3.x / Webpack 4
+- **Direct data imports** — static `database.ts` with typed interfaces; no axios, no mock adapter
+- **WebP image pipeline** — all images converted to WebP (1,726 KB → 560 KB, −68%)
+- **Bootstrap tree-shaking** — custom SCSS partial imports only what's used (270 KB → 130 KB, −52%)
+- **Security headers** via `public/_headers` — CSP (no `unsafe-inline` in `script-src`), X-Frame-Options, Referrer-Policy, Permissions-Policy
+- **Contact form** — Netlify Forms with honeypot spam protection; no third-party SDK
+- **Error boundaries** — route-level `ErrorBoundary` catches lazy-load failures gracefully
+- **13 unit tests** — Vitest + RTL covering app rendering, contact form validation, honeypot, and fetch paths
+- **Playwright E2E** — desktop navigation, mobile hamburger (Pixel 5 viewport), axe-core a11y baseline on all routes
+- **Three GitHub Actions workflows** — CI (`ci.yml`), Netlify deploy preview E2E (`e2e-preview.yml`), auto-release (`release.yml`)
+- **SEO meta layer** — Open Graph, Twitter Card, `sitemap.xml`, `robots.txt`, preconnect hints
+- **Accessibility** — `<main>` landmark, `aria-label` on nav and social icons, skip-to-content, descriptive alt text; axe-core `KNOWN_ISSUES` is empty
 
 ---
 
 ## Getting Started
 
-**Prerequisites:** Node 20 (see `.nvmrc`)
+**Prerequisites:** Node 22 (see `.nvmrc`)
 
 ```bash
-nvm use          # switch to Node 20
+nvm use          # switch to Node 22
 npm install      # install dependencies
-npm start        # start dev server at localhost:3000
+npm start        # Vite dev server at localhost:3000
 ```
-
-> The build requires `NODE_OPTIONS=--openssl-legacy-provider` (already wired into `package.json` scripts) to run on Node 17+ with CRA 3.x.
 
 ---
 
@@ -54,29 +59,30 @@ npm start        # start dev server at localhost:3000
 
 | Command | What it does |
 |---|---|
-| `npm start` | Dev server at `localhost:3000` with hot reload |
-| `npm test` | Unit tests in watch mode (React Testing Library) |
-| `npm run build` | Production build to `build/` |
-| `npm run test:e2e` | Playwright E2E suite (requires running dev server) |
+| `npm start` | Vite dev server at `localhost:3000` with hot reload |
+| `npm test` | Vitest unit test suite |
+| `npm run build` | Production build to `dist/` |
+| `npx tsc --noEmit` | TypeScript type-check (strict mode) |
+| `npx playwright test` | Playwright E2E suite |
 
 ---
 
 ## Testing
 
 ```bash
-# Unit tests (runs in watch mode by default)
+# Unit tests
 npm test
 
-# Run once with coverage
-CI=true npm test
+# TypeScript type-check
+npx tsc --noEmit
 
 # Playwright E2E — desktop + mobile navigation + a11y baseline
 npx playwright test
 ```
 
 Tests are split across:
-- `src/App.test.js` — app rendering and navigation
-- `src/pages/Contact.test.js` — form validation, honeypot, bot detection
+- `src/App.test.tsx` — app rendering and navigation
+- `src/pages/Contact.test.tsx` — form validation, honeypot, bot detection, fetch paths
 - `e2e/navigation.spec.js` — desktop Playwright suite
 - `e2e/mobile-navigation.spec.js` — mobile Playwright suite (Pixel 5 viewport)
 - `e2e/accessibility.spec.js` — axe-core on all routes
@@ -95,16 +101,16 @@ PRs go to `development`. Releases go to `main` via a versioned release branch. T
 
 ---
 
-## Ongoing Modernization
+## Modernization History
 
-The site is mid-way through a structured dependency and architecture upgrade:
+Six-phase structured upgrade from a CRA 3.4.3 / React 16 / JavaScript baseline:
 
 - ✅ **Phase 1** — Safety net: RTL tests, Playwright E2E, axe-core baseline, CI workflows
 - ✅ **Phase 2** — Security headers, honeypot spam protection, CSP hardening
-- ✅ **Phase 3** — SEO meta layer, accessibility landmarks, content and data updates
-- ✅ **Phase 4** — Dependency upgrades: axios 1.x, Bootstrap 5, React Router v6; Netlify Forms migration
-- 🔜 **Phase 5** — CRA → Vite migration, code splitting, WebP image pipeline
-- 🔜 **Phase 6** — React 18, TypeScript migration, error boundaries, dead code cleanup
+- ✅ **Phase 3** — SEO meta layer, accessibility landmarks, content and data updates; Netlify Forms migration
+- ✅ **Phase 4** — Dependency upgrades: axios 1.x, Bootstrap 5.3, React Router v6
+- ✅ **Phase 5** — CRA → Vite 8 migration; tsParticles v3; WebP images; Bootstrap tree-shaking; code splitting; TypeScript foundation
+- ✅ **Phase 6** — React 18 (`createRoot`); TypeScript strict mode; axios data layer replaced with direct imports; error boundaries; dead code cleanup
 
 ---
 

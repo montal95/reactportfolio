@@ -2,13 +2,10 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-// Import mock data setup - must be before component imports
-import '../data';
-
 import Contact from './Contact';
 
 // Mock global fetch to prevent real network calls
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn() as unknown as typeof fetch;
 
 // Renders Contact and waits until the form is ready
 const renderAndWait = async () => {
@@ -23,7 +20,7 @@ const renderAndWait = async () => {
 };
 
 // Fill visible form fields; omitted keys default to empty string
-const fillForm = ({ name, email, subject, message }) => {
+const fillForm = ({ name, email, subject, message }: Partial<{ name: string; email: string; subject: string; message: string }>) => {
   fireEvent.change(screen.getByLabelText(/Enter your name/i), {
     target: { name: 'name', value: name || '' },
   });
@@ -94,7 +91,7 @@ describe('Contact Form — Honeypot', () => {
   });
 
   it('submits via Netlify Forms fetch when honeypot is empty (real user)', async () => {
-    fetch.mockResolvedValue({ ok: true });
+    vi.mocked(fetch).mockResolvedValue({ ok: true } as Response);
     await renderAndWait();
     fillForm(validFormData);
     submitForm();
@@ -115,7 +112,7 @@ describe('Contact Form — Honeypot', () => {
   });
 
   it('clears all form fields after successful submission', async () => {
-    fetch.mockResolvedValue({ ok: true });
+    vi.mocked(fetch).mockResolvedValue({ ok: true } as Response);
     await renderAndWait();
     fillForm(validFormData);
     submitForm();
@@ -129,7 +126,7 @@ describe('Contact Form — Honeypot', () => {
   });
 
   it('shows error message when server returns a non-ok response', async () => {
-    fetch.mockResolvedValue({ ok: false });
+    vi.mocked(fetch).mockResolvedValue({ ok: false } as Response);
     await renderAndWait();
     fillForm(validFormData);
     submitForm();
@@ -139,7 +136,7 @@ describe('Contact Form — Honeypot', () => {
   });
 
   it('shows error message when fetch throws a network error', async () => {
-    fetch.mockRejectedValue(new Error('Network failure'));
+    vi.mocked(fetch).mockRejectedValue(new Error('Network failure'));
     await renderAndWait();
     fillForm(validFormData);
     submitForm();
