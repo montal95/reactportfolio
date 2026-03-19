@@ -144,14 +144,7 @@ const database = {
       largeImageUrl: ["/images/Flatbook-image-lg.webp"],
       url: "https://flatbook-smj.netlify.app/",
     },
-    {
-      id: 4,
-      title: "New Tetris",
-      subtitle: "A new twist on a classic game. Made from pure HTML/CSS and Vanilla Javascript",
-      imageUrl: "/images/Tetris-image-sm.webp",
-      largeImageUrl: ["/images/Tetris-image-lg.webp"],
-      url: 'https://tetrisnew3.herokuapp.com/' // TODO: replace with re-hosted URL (Heroku free tier sunset Nov 2022)
-    },
+
   ],
   experience: {
     workingExperience: [
