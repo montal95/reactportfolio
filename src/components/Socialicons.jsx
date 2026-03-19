@@ -1,16 +1,9 @@
-import React, {useState, useEffect} from "react";
-import axios from 'axios';
+import React from "react";
+import { information } from "../data/db/database";
 import LineIcon from 'react-lineicons';
 
 function Socialicons(props){
-  const [socialLinks, setSocialLinks] = useState({});
-
-  useEffect(() => {
-    axios.get('/api/information')
-      .then(response =>{
-        setSocialLinks(response.data.socialLinks);
-      })
-  }, [])
+  const socialLinks = information.socialLinks;
 
   return (
     <ul className={props.bordered ? 'mi-socialicons mi-socialicons-bordered' : 'mi-socialicons'}>

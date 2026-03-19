@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import axios from "axios";
+import { information } from "../data/db/database";
 import LineIcon from "react-lineicons";
 
 function Header() {
-  const [information, setInformation] = useState("");
   const [navigationToggler, setNavigationToggler] = useState(false);
 
   const handleNavigationToggler = () => {
     setNavigationToggler(!navigationToggler);
   };
-
-  useEffect(() => {
-    axios.get("/api/information").then((response) => {
-      setInformation(response.data);
-    });
-  }, []);
 
   return (
     <nav aria-label="Main navigation" className={navigationToggler ? "mi-header is-visible" : "mi-header"}>

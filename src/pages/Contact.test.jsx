@@ -2,9 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-// Import mock data setup - must be before component imports
-import '../data';
-
 import Contact from './Contact';
 
 // Mock global fetch to prevent real network calls

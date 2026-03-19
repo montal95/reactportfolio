@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { contactInfo } from "../data/db/database";
 import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
 import Layout from "../components/Layout";
 
 function Contact() {
-  const [phoneNumbers, setPhoneNumbers] = useState([]);
-  const [emailAddress, setEmailAddress] = useState([]);
-  const [address, setAddress] = useState([]);
+  const { phoneNumbers, emailAddress, address } = contactInfo;
   const [formdata, setFormdata] = useState({
     name: "",
     email: "",
@@ -84,14 +82,6 @@ function Contact() {
     const alertType = error ? "alert-danger" : "alert-success";
     return <div className={`alert ${alertType} mt-4`}>{message}</div>;
   };
-
-  useEffect(() => {
-    axios.get("/api/contactinfo").then((response) => {
-      setPhoneNumbers(response.data.phoneNumbers);
-      setEmailAddress(response.data.emailAddress);
-      setAddress(response.data.address);
-    });
-  }, []);
 
   return (
     <Layout>
