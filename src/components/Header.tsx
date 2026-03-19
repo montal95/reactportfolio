@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { information } from "../data/db/database";
 import LineIcon from "react-lineicons";
 
-function Header() {
+function Header(): React.JSX.Element {
   const [navigationToggler, setNavigationToggler] = useState(false);
 
   const handleNavigationToggler = () => {

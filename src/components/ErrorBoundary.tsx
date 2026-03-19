@@ -1,7 +1,15 @@
-import { Component } from 'react';
+import { Component, ReactNode } from 'react';
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+interface Props {
+  children: ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+}
+
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
@@ -14,7 +22,7 @@ class ErrorBoundary extends Component {
     console.error('Route error:', error, info);
   }
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       return (
         <div className="container mt-5 text-center">
