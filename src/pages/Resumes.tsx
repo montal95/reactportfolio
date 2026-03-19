@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React from "react";
+import { skills, experience } from "../data/db/database";
 import TrackVisibility from "react-on-screen";
 import Sectiontitle from "../components/Sectiontitle";
 import Smalltitle from '../components/Smalltitle';
@@ -7,22 +7,9 @@ import Layout from "../components/Layout";
 import Progress from "../components/Progress";
 import Resume from "../components/Resume";
 
-function Resumes(){
-  const [skills, setSkills] = useState([]);
-  const [workingExperience, setWorkingExperience] = useState([]);
-  const [educationExperience, setEducationExperience] = useState([]);
-
-  useEffect(() =>{
-    axios.get('/api/skills')
-      .then(response =>{
-        setSkills(response.data);
-      })
-    axios.get('/api/experience')
-      .then(response =>{
-        setWorkingExperience(response.data.workingExperience);
-        setEducationExperience(response.data.educationExperience);
-      })
-  }, [])
+function Resumes(): React.JSX.Element {
+  const workingExperience = experience.workingExperience;
+  const educationExperience = experience.educationExperience;
 
   return (
     <Layout>

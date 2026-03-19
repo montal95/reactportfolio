@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import { information } from "../data/db/database";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
-function Home(){
-  const [information, setInformation] = useState("");
+function Home(): React.JSX.Element {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -14,13 +13,6 @@ function Home(){
       await loadSlim(engine);
     }).then(() => setInit(true));
   }, []);
-
-  useEffect(() =>{
-    axios.get('/api/information')
-    .then( response => {
-      setInformation(response.data);
-    })
-  }, [])
 
   const paramConfig = {
     particles: {
@@ -50,8 +42,8 @@ function Home(){
       move: {
         random: true,
         speed: 1,
-        direction: "top",
-        outModes: { default: "out" }
+        direction: "top" as const,
+        outModes: { default: "out" as const }
       }
     }
   };

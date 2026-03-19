@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from "react";
-import axios from 'axios';
+import React from "react";
+import { information } from "../data/db/database";
 import LineIcon from 'react-lineicons';
 
-function Socialicons(props){
-  const [socialLinks, setSocialLinks] = useState({});
+interface SocialiconsProps {
+  bordered?: boolean;
+}
 
-  useEffect(() => {
-    axios.get('/api/information')
-      .then(response =>{
-        setSocialLinks(response.data.socialLinks);
-      })
-  }, [])
+function Socialicons({ bordered }: SocialiconsProps): React.JSX.Element {
+  const socialLinks = information.socialLinks;
 
   return (
-    <ul className={props.bordered ? 'mi-socialicons mi-socialicons-bordered' : 'mi-socialicons'}>
+    <ul className={bordered ? 'mi-socialicons mi-socialicons-bordered' : 'mi-socialicons'}>
       {!socialLinks.facebook ? null : <li>
         <a rel="noopener noreferrer" target="_blank" href={socialLinks.facebook} aria-label="Facebook">
           <LineIcon name="facebook"/>
