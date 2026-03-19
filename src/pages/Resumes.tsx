@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 import Progress from "../components/Progress";
 import Resume from "../components/Resume";
 
-function Resumes(){
+function Resumes(): React.JSX.Element {
   const workingExperience = experience.workingExperience;
   const educationExperience = experience.educationExperience;
 

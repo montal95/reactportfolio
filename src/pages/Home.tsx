@@ -5,7 +5,7 @@ import { loadSlim } from "@tsparticles/slim";
 import Socialicons from "../components/Socialicons";
 import Layout from "../components/Layout";
 
-function Home(){
+function Home(): React.JSX.Element {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -42,8 +42,8 @@ function Home(){
       move: {
         random: true,
         speed: 1,
-        direction: "top",
-        outModes: { default: "out" }
+        direction: "top" as const,
+        outModes: { default: "out" as const }
       }
     }
   };

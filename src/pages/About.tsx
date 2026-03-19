@@ -8,7 +8,7 @@ import Layout from "../components/Layout";
 import Service from "../components/Service";
 // import Testimonial from "../components/Testimonial";
 
-function About() {
+function About(): React.JSX.Element {
   // const [toggler, setToggler] = useState(false);
 
   // const sliderSettings = {

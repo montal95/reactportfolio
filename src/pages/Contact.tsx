@@ -4,9 +4,17 @@ import * as Icon from "react-feather";
 import Sectiontitle from "../components/Sectiontitle";
 import Layout from "../components/Layout";
 
-function Contact() {
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  website: string;
+}
+
+function Contact(): React.JSX.Element {
   const { phoneNumbers, emailAddress, address } = contactInfo;
-  const [formdata, setFormdata] = useState({
+  const [formdata, setFormdata] = useState<FormData>({
     name: "",
     email: "",
     subject: "",
@@ -23,7 +31,7 @@ function Contact() {
     { key: "message", label: "Message" },
   ];
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     // Honeypot: hidden field filled only by bots — silently discard
     if (formdata.website) {
@@ -66,13 +74,13 @@ function Contact() {
       setMessage("Something went wrong. Please try again.");
     }
   };
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormdata({
       ...formdata,
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-  const numberFormatter = (number) => {
+  const numberFormatter = (number: string): string => {
     const phnNumber = number;
     return phnNumber;
   };
@@ -140,8 +148,8 @@ function Contact() {
                       onChange={handleChange}
                       name="message"
                       id="contact-form-message"
-                      cols="30"
-                      rows="6"
+                      cols={30}
+                      rows={6}
                       value={formdata.message}
                     ></textarea>
                   </div>
@@ -154,7 +162,7 @@ function Contact() {
                       name="website"
                       id="contact-form-website"
                       value={formdata.website}
-                      tabIndex="-1"
+                      tabIndex={-1}
                       autoComplete="off"
                     />
                   </div>

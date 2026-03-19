@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 
-function Notfound() {
+function Notfound(): React.JSX.Element {
   return (
     <Layout>
       <div className="mi-about-area mi-section">
