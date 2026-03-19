@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.scss";
 
 const Home        = lazy(() => import("./pages/Home"));
@@ -12,16 +13,18 @@ const Notfound    = lazy(() => import("./pages/Notfound"));
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div className="container mt-5">Loading…</div>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/resume" element={<Resumes />} />
-          <Route path="/portfolios" element={<Portfolios />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Notfound />} />
-        </Routes>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<div className="container mt-5">Loading…</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/resume" element={<Resumes />} />
+            <Route path="/portfolios" element={<Portfolios />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Notfound />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }
