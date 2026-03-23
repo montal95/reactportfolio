@@ -12,6 +12,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    env: { NODE_ENV: 'test' },
     setupFiles: './src/setupTests.js',
     css: true,
     include: ['src/**/*.test.{js,jsx,ts,tsx}'],
