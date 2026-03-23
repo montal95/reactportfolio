@@ -1,1 +1,1 @@
-declare module 'react-lineicons';
+// Reserved for future third-party module type augmentations.

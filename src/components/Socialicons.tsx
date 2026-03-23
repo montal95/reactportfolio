@@ -1,6 +1,6 @@
 import React from "react";
 import { information } from "../data/db/database";
-import LineIcon from 'react-lineicons';
+import { GitHub, Linkedin, Twitter, Dribbble, ExternalLink } from "react-feather";
 
 interface SocialiconsProps {
   bordered?: boolean;
@@ -9,48 +9,27 @@ interface SocialiconsProps {
 function Socialicons({ bordered }: SocialiconsProps): React.JSX.Element {
   const socialLinks = information.socialLinks;
 
+  const renderLink = (href: string | undefined, icon: React.ReactNode, label: string) => {
+    if (!href) return null;
+    return (
+      <li>
+        <a rel="noopener noreferrer" target="_blank" href={href} aria-label={label}>
+          {icon}
+        </a>
+      </li>
+    );
+  };
+
   return (
     <ul className={bordered ? 'mi-socialicons mi-socialicons-bordered' : 'mi-socialicons'}>
-      {!socialLinks.facebook ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.facebook} aria-label="Facebook">
-          <LineIcon name="facebook"/>
-        </a>
-      </li>}
-      {!socialLinks.twitter ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.twitter} aria-label="X (formerly Twitter)">
-          <LineIcon name="twitter"/>
-        </a>
-      </li>}
-      {!socialLinks.pinterest ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.pinterest} aria-label="Pinterest">
-          <LineIcon name="pinterest"/>
-        </a>
-      </li>}
-      {!socialLinks.behance ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.behance} aria-label="Behance">
-          <LineIcon name="behance"/>
-        </a>
-      </li>}
-      {!socialLinks.linkedin ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.linkedin} aria-label="LinkedIn">
-          <LineIcon name="linkedin"/>
-        </a>
-      </li>}
-      {!socialLinks.dribbble ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.dribbble} aria-label="Dribbble">
-          <LineIcon name="dribbble"/>
-        </a>
-      </li>}
-      {!socialLinks.github ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.github} aria-label="GitHub">
-          <LineIcon name="github"/>
-        </a>
-      </li>}
-      {!socialLinks.twitch ? null : <li>
-        <a rel="noopener noreferrer" target="_blank" href={socialLinks.twitch} aria-label="Twitch">
-          <LineIcon name="twitch"/>
-        </a>
-      </li>}
+      {renderLink(socialLinks.facebook,  <ExternalLink />, "Facebook")}
+      {renderLink(socialLinks.twitter,   <Twitter />,      "X (formerly Twitter)")}
+      {renderLink(socialLinks.linkedin,  <Linkedin />,     "LinkedIn")}
+      {renderLink(socialLinks.dribbble,  <Dribbble />,     "Dribbble")}
+      {renderLink(socialLinks.GitHub,    <GitHub />,       "GitHub")}
+      {renderLink(socialLinks.pinterest, <ExternalLink />, "Pinterest")}
+      {renderLink(socialLinks.behance,   <ExternalLink />, "Behance")}
+      {renderLink(socialLinks.twitch,    <ExternalLink />, "Twitch")}
     </ul>
   );
 }
