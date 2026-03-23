@@ -1,32 +1,50 @@
 import React from "react";
 import { skills, experience } from "../data/db/database";
-import TrackVisibility from "react-on-screen";
+import type { SkillCategory } from "../data/types";
 import Sectiontitle from "../components/Sectiontitle";
 import Smalltitle from '../components/Smalltitle';
 import Layout from "../components/Layout";
-import Progress from "../components/Progress";
 import Resume from "../components/Resume";
 
 function Resumes(): React.JSX.Element {
   const workingExperience = experience.workingExperience;
   const educationExperience = experience.educationExperience;
+  const activeCategory = skills.find((c: SkillCategory) => c.tier === 'active');
+  const otherCategories = skills.filter((c: SkillCategory) => c.tier !== 'active');
 
   return (
     <Layout>
       <div className="mi-skills-area mi-section mi-padding-top">
         <div className="container">
-          <Sectiontitle title="My Skills" />
-          <div className="mi-skills">
-            <div className="row mt-30-reverse">
-              {skills.map(skill => (
-                <TrackVisibility once className="col-lg-6 mt-30" key={skill.title}>
-                  <Progress title={skill.title} percentage={skill.value} />
-                </TrackVisibility>
-              ))}
+          <Sectiontitle title="Skills &amp; Technologies" />
+
+          {activeCategory && (
+            <div className="mi-skills-active-block">
+              <p className="mi-skills-active-label">{activeCategory.category}</p>
+              <div className="mi-skills-chips">
+                {activeCategory.skills.map(skill => (
+                  <span key={skill} className="mi-skill-chip mi-skill-chip--active">{skill}</span>
+                ))}
+              </div>
             </div>
+          )}
+
+          <div className="mi-skills-categories">
+            {otherCategories.map((cat: SkillCategory) => (
+              <div key={cat.category} className="mi-skills-category">
+                <p className="mi-skills-category-label">{cat.category}</p>
+                <div className="mi-skills-chips">
+                  {cat.skills.map(skill => (
+                    <span key={skill} className={`mi-skill-chip mi-skill-chip--${cat.tier}`}>{skill}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
+
         </div>
       </div>
+
       <div className="mi-resume-area mi-section mi-padding-top mi-padding-bottom">
         <div className="container">
           <Sectiontitle title="Resume" />
