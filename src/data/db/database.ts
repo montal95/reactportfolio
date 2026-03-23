@@ -58,16 +58,40 @@ const database: {
   },
   services: [
     {
-      title: "Web Design",
-      icon: "color-pallet",
-      details:
-        "Planning out a great design is the first step to creating a great experience. Design Tools: Balsamiq, Figma, Pen & Paper",
-    },
-    {
-      title: "Web Development",
+      title: "Backend API Development",
       icon: "code",
       details:
-        "I am always building, whether its for a client, or fleshing out my ever expanding toolset. Languages I speak: HTML, CSS, Javascript, Ruby, Python",
+        "Building and maintaining RESTful APIs with Ruby on Rails and Node.js. TDD with rSpec, FactoryBot, and Vitest. Production experience in healthcare and enterprise environments.",
+    },
+    {
+      title: "Legacy Modernization",
+      icon: "layers",
+      details:
+        "Migrating legacy systems to modern stacks — PHP/Laravel to Rails, CRA to Vite, Bootstrap 4 to 5. Emphasis on incremental delivery with zero disruption to production.",
+    },
+    {
+      title: "CI/CD & DevOps",
+      icon: "reload",
+      details:
+        "Jenkins and GitHub Actions pipelines with automated test gates, environment-separated deployments, and AWS integrations across EC2, S3, and SNS.",
+    },
+    {
+      title: "AI Agent Engineering",
+      icon: "bolt",
+      details:
+        "Designing multi-agent pipelines with LangChain, LangGraph, CrewAI, and Anthropic's Model Context Protocol. Practical orchestration delivered through client work and personal tooling.",
+    },
+    {
+      title: "Full-Stack Feature Delivery",
+      icon: "monitor",
+      details:
+        "End-to-end feature ownership across Rails backends, React frontends, and Hotwire-powered interfaces. Experienced across full delivery cycles from API design to production hotfix.",
+    },
+    {
+      title: "Database & Infrastructure",
+      icon: "database",
+      details:
+        "PostgreSQL schema design, Redis caching, and AWS-backed data pipelines. Environment-separated storage with S3 and strict access control across staging and production.",
     },
   ],
   skills: [
