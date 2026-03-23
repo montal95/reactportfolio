@@ -26,7 +26,7 @@ function Socialicons({ bordered }: SocialiconsProps): React.JSX.Element {
       {renderLink(socialLinks.twitter,   <Twitter />,      "X (formerly Twitter)")}
       {renderLink(socialLinks.linkedin,  <Linkedin />,     "LinkedIn")}
       {renderLink(socialLinks.dribbble,  <Dribbble />,     "Dribbble")}
-      {renderLink(socialLinks.GitHub,    <GitHub />,       "GitHub")}
+      {renderLink(socialLinks.github,    <GitHub />,       "GitHub")}
       {renderLink(socialLinks.pinterest, <ExternalLink />, "Pinterest")}
       {renderLink(socialLinks.behance,   <ExternalLink />, "Behance")}
       {renderLink(socialLinks.twitch,    <ExternalLink />, "Twitch")}
