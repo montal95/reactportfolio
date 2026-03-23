@@ -1,79 +1,11 @@
-// ─── Interfaces ──────────────────────────────────────────────────────────────
-
-export interface SocialLinks {
-  facebook: string;
-  twitter: string;
-  pinterest: string;
-  behance: string;
-  linkedin: string;
-  dribbble: string;
-  github: string;
-  twitch: string;
-}
-
-export interface Information {
-  name: string;
-  aboutContent: string;
-  age: number;
-  phone: string;
-  nationality: string;
-  language: string;
-  email: string;
-  address: string;
-  freelanceStatus: string;
-  socialLinks: SocialLinks;
-  brandImage: string;
-  aboutImage: string;
-  aboutImageLg: string;
-  cvfile: string;
-}
-
-export interface Service {
-  title: string;
-  icon: string;
-  details: string;
-}
-
-export interface Skill {
-  title: string;
-  value: number;
-}
-
-export interface PortfolioItem {
-  id: number;
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  largeImageUrl: string[];
-  url: string;
-}
-
-export interface WorkExperience {
-  id: number;
-  year: string;
-  position: string;
-  company: string;
-  details: string;
-}
-
-export interface EducationExperience {
-  id: number;
-  year: string;
-  graduation: string;
-  university: string;
-  details: string;
-}
-
-export interface Experience {
-  workingExperience: WorkExperience[];
-  educationExperience: EducationExperience[];
-}
-
-export interface ContactInfo {
-  phoneNumbers: string[];
-  emailAddress: string[];
-  address: string;
-}
+import type {
+  Information,
+  Service,
+  SkillCategory,
+  PortfolioItem,
+  Experience,
+  ContactInfo,
+} from '../types';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -93,7 +25,7 @@ function getAge(birthdate: string): number {
 const database: {
   information: Information;
   services: Service[];
-  skills: Skill[];
+  skills: SkillCategory[];
   portfolios: PortfolioItem[];
   experience: Experience;
   contactInfo: ContactInfo;
@@ -139,14 +71,51 @@ const database: {
     },
   ],
   skills: [
-    { title: "HTML5", value: 90 },
-    { title: "CSS3", value: 75 },
-    { title: "Javascript", value: 80 },
-    { title: "jQuery", value: 60 },
-    { title: "ReactJS", value: 80 },
-    { title: "Photoshop", value: 50 },
-    { title: "Ruby", value: 80 },
-    { title: "Rails", value: 75 },
+    {
+      category: "Active stack — production daily",
+      tier: "active",
+      skills: ["Ruby on Rails", "React.js", "TypeScript", "PostgreSQL", "Redis", "AWS", "Docker", "GitHub Actions"],
+    },
+    {
+      category: "AI & Agents",
+      tier: "ai",
+      skills: ["LangChain", "LangGraph", "CrewAI", "MCP", "Claude API"],
+    },
+    {
+      category: "Backend",
+      tier: "default",
+      skills: ["Node.js", "Express.js", "Django", "Next.js", "Hotwire", "Sinatra"],
+    },
+    {
+      category: "Languages",
+      tier: "default",
+      skills: ["Ruby", "JavaScript", "Python", "SQL", "HTML / CSS", "Groovy"],
+    },
+    {
+      category: "Frontend",
+      tier: "default",
+      skills: ["Redux", "Redux-Thunk", "React Hooks", "Styled-Components", "AngularJS"],
+    },
+    {
+      category: "Databases",
+      tier: "default",
+      skills: ["MongoDB", "SQLite", "Firebase", "GraphQL", "NeDB"],
+    },
+    {
+      category: "Cloud & Infra",
+      tier: "default",
+      skills: ["EC2 · S3 · SNS", "Docker Compose", "Heroku", "Netlify"],
+    },
+    {
+      category: "CI/CD & Testing",
+      tier: "default",
+      skills: ["Jenkins", "rSpec", "FactoryBot", "Mocha", "Chai"],
+    },
+    {
+      category: "Tooling",
+      tier: "default",
+      skills: ["Datadog", "Figma", "Jira", "Confluence", "Lighthouse"],
+    },
   ],
   portfolios: [
     {
