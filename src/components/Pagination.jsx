@@ -1,13 +1,7 @@
 import React from "react";
-import LineIcon from "react-lineicons";
+import { ChevronLeft, ChevronRight } from "react-feather";
 
-function Pagination({
-  itemsPerPage,
-  totalItems,
-  paginate,
-  currentPage,
-  className
-}) {
+function Pagination({ itemsPerPage, totalItems, paginate, currentPage, className }) {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
@@ -20,24 +14,19 @@ function Pagination({
         {currentPage === 1 ? null : (
           <li>
             <a onClick={e => paginate(e, currentPage - 1)} href="!#">
-              <LineIcon name="chevron-left" />
+              <ChevronLeft />
             </a>
           </li>
         )}
         {pageNumbers.map(number => (
-          <li
-            key={number}
-            className={currentPage === number ? "is-active" : null}
-          >
-            <a onClick={e => paginate(e, number)} href="!#">
-              {number}
-            </a>
+          <li key={number} className={currentPage === number ? "is-active" : null}>
+            <a onClick={e => paginate(e, number)} href="!#">{number}</a>
           </li>
         ))}
         {currentPage === pageNumbers[pageNumbers.length - 1] ? null : (
           <li>
             <a onClick={e => paginate(e, currentPage + 1)} href="!#">
-              <LineIcon name="chevron-right" />
+              <ChevronRight />
             </a>
           </li>
         )}
