@@ -144,6 +144,15 @@ const database: {
   portfolios: [
     {
       id: 1,
+      title: "sammontalvojr.com",
+      subtitle:
+        "This portfolio site — 6-phase modernization from CRA 3 to Vite 8, React 18, and TypeScript.",
+      imageUrl: "/images/portfolio-site-sm.webp",
+      largeImageUrl: ["/images/portfolio-site-lg.webp"],
+      url: "https://github.com/montal95/reactportfolio",
+    },
+    {
+      id: 2,
       title: "Phasmophobia Notepad",
       subtitle: "A Companion PWA mimics the same functionality of the journal in the game Phasmophobia",
       imageUrl: "/images/PhasmoNotes.webp",
@@ -151,7 +160,7 @@ const database: {
       url: "https://gbnotepad.netlify.app/",
     },
     {
-      id: 2,
+      id: 3,
       title: "PITS",
       subtitle: "A PWA to track your plant watering schedule.",
       imageUrl: "/images/PITS-Image-SM.webp",
@@ -159,7 +168,7 @@ const database: {
       url: "https://pits-pwa-tracking.netlify.app/",
     },
     {
-      id: 3,
+      id: 4,
       title: "Flatbook",
       subtitle: "Minimalist notetaking app.",
       imageUrl: "/images/Flatbook-image-sm.webp",
