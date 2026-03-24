@@ -1,6 +1,6 @@
 import React from "react";
 import { information } from "../data/db/database";
-import { GitHub, Linkedin, Twitter, Dribbble, ExternalLink } from "react-feather";
+import { GitHub, Linkedin, Twitter, Dribbble, Twitch, ExternalLink } from "react-feather";
 
 interface SocialiconsProps {
   bordered?: boolean;
@@ -29,7 +29,7 @@ function Socialicons({ bordered }: SocialiconsProps): React.JSX.Element {
       {renderLink(socialLinks.github,    <GitHub />,       "GitHub")}
       {renderLink(socialLinks.pinterest, <ExternalLink />, "Pinterest")}
       {renderLink(socialLinks.behance,   <ExternalLink />, "Behance")}
-      {renderLink(socialLinks.twitch,    <ExternalLink />, "Twitch")}
+      {renderLink(socialLinks.twitch,    <Twitch />,       "Twitch")}
     </ul>
   );
 }
