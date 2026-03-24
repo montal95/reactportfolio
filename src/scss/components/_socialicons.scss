@@ -12,7 +12,8 @@
     margin: 0 8px;
 
     a {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       transition: $transition;
       color: $color-body;
       font-size: 1.5rem;
@@ -28,11 +29,11 @@
       a{
         height: 45px;
         width: 45px;
-        line-height: 1;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 2px solid $color-border;
         border-radius: 100px;
-        line-height: 45px;
         font-size: 1.3rem;
 
         svg{
@@ -52,7 +53,6 @@
         a{
           height: 42px;
           width: 42px;
-          line-height: 42px;
           font-size: 1.1rem;
         }
       }
@@ -71,7 +71,6 @@
         a{
           height: 38px;
           width: 38px;
-          line-height: 38px;
           font-size: 1rem;
         }
       }
