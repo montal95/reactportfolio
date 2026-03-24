@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a7fe4db5-e077-4f6c-ac6d-eb833ee81b12/deploy-status)](https://app.netlify.com/sites/gallant-hypatia-c82d23/deploys)
 [![CI](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-4.0.0-blue)](https://github.com/montal95/reactportfolio/releases)
+[![Version](https://img.shields.io/badge/version-4.1.0-blue)](https://github.com/montal95/reactportfolio/releases)
 
 Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) — built with React 18 and TypeScript, deployed on Netlify, and modernized through a structured six-phase upgrade plan.
 
