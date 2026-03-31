@@ -1057,4 +1057,190 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* ── Resume: Skill blocks ────────────────────────────────────────── */
+  .skill-block {
+    padding: var(--sp-md);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--sp-md);
+  }
+
+  .skill-block--active {
+    background: var(--accent-dim);
+    border-color: rgba(0, 229, 160, 0.2);
+  }
+
+  .skill-block--ai {
+    background: var(--accent-ai-dim);
+    border-color: rgba(124, 115, 230, 0.2);
+    margin-bottom: 0;
+  }
+
+  .skill-block-label {
+    font-size: var(--fz-xs);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: var(--sp-sm);
+  }
+
+  .skill-block--active .skill-block-label { color: var(--accent); }
+  .skill-block--ai    .skill-block-label  { color: var(--accent-ai); }
+
+  .skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+  }
+
+  .skill-chip {
+    display: inline-block;
+    padding: 5px 12px;
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+    font-weight: 500;
+    border-radius: var(--radius-pill);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    white-space: nowrap;
+  }
+
+  .skill-chip--active {
+    background: rgba(0, 229, 160, 0.12);
+    border-color: rgba(0, 229, 160, 0.3);
+    color: var(--accent);
+  }
+
+  .skill-chip--ai {
+    background: rgba(124, 115, 230, 0.12);
+    border-color: rgba(124, 115, 230, 0.3);
+    color: var(--accent-ai);
+  }
+
+  .skill-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-md);
+    margin-top: var(--sp-md);
+
+    .skill-block {
+      margin-bottom: 0;
+    }
+  }
+
+  /* ── Resume: Experience timeline ─────────────────────────────────── */
+  .experience-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-xl);
+    align-items: start;
+  }
+
+  .timeline-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-sm);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--fz-lg);
+    color: var(--text-heading);
+    margin-bottom: var(--sp-lg);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 1.5px;
+      background: var(--border);
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 var(--sp-lg) var(--sp-md);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1.5px var(--accent);
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .timeline-year {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .timeline-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--fz-body);
+    color: var(--text-heading);
+    margin-bottom: 2px;
+  }
+
+  .timeline-company {
+    font-size: var(--fz-sm);
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .timeline-details {
+    font-size: var(--fz-sm);
+    color: var(--text-body);
+    line-height: 1.65;
+    opacity: 0.8;
+  }
+
+  /* ── Resume responsive ───────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .skill-categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .skill-categories-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 }
