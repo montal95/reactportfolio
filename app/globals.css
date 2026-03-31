@@ -1243,4 +1243,180 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* ── Contact: layout ─────────────────────────────────────────────── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: var(--sp-xl);
+    align-items: start;
+  }
+
+  .contact-sub-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--fz-lg);
+    color: var(--text-heading);
+    margin-bottom: var(--sp-md);
+  }
+
+  /* ── Contact: form ───────────────────────────────────────────────── */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--text-heading);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    font-size: var(--fz-sm);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  /* Honeypot — visually hidden but present in HTML for Netlify */
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+
+  .form-error {
+    font-size: var(--fz-sm);
+    color: #f87171;
+    padding: 10px 14px;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-submit {
+    gap: 8px;
+    align-self: flex-start;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  /* Success state */
+  .contact-success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-md);
+    padding: var(--sp-lg);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0, 229, 160, 0.25);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-success-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  /* ── Contact: sidebar ────────────────────────────────────────────── */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    padding: var(--sp-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-info-block {
+    display: flex;
+    gap: var(--sp-md);
+    align-items: flex-start;
+  }
+
+  .contact-info-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+  }
+
+  .contact-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-info-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: var(--fz-sm);
+    color: var(--text-heading);
+  }
+
+  .contact-info-value {
+    font-size: var(--fz-sm);
+    color: var(--text-muted);
+    line-height: 1.5;
+
+    &[href] {
+      color: var(--accent);
+      transition: opacity var(--transition-fast);
+
+      &:hover { opacity: 0.75; }
+    }
+  }
+
+  /* ── Contact responsive ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-sidebar {
+      order: -1;
+    }
+  }
 }
