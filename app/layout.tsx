@@ -9,6 +9,7 @@ import "@fontsource/jetbrains-mono/400.css";
 import "./globals.css";
 import ThemeProvider from "@/app/components/ThemeProvider";
 import Nav from "@/app/components/Nav";
+import PageTransition from "@/app/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Sam Montalvo Jr — Full-Stack Engineer",
@@ -31,7 +32,9 @@ export default function RootLayout({
         <div className="orb orb-3" aria-hidden="true" />
         <ThemeProvider>
           <Nav />
-          <main id="main-content">{children}</main>
+          <main id="main-content">
+            <PageTransition>{children}</PageTransition>
+          </main>
         </ThemeProvider>
       </body>
     </html>
