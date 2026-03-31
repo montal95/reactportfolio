@@ -40,10 +40,15 @@ export default function ContactForm() {
 
     setStatus('sending');
     try {
+      // Use FormData from the form element so Netlify's injected
+      // g-recaptcha-response token is automatically included in the body.
+      const formData = new FormData(e.currentTarget);
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'contact', ...fields }).toString(),
+        body: new URLSearchParams(
+          Array.from(formData.entries()) as Array<[string, string]>
+        ).toString(),
       });
       if (res.ok) { setFields(EMPTY); setStatus('success'); }
       else throw new Error(`HTTP ${res.status}`);
@@ -70,8 +75,6 @@ export default function ContactForm() {
     <form
       name="contact"
       method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="website"
       onSubmit={handleSubmit}
       className="contact-form"
       noValidate
@@ -137,6 +140,9 @@ export default function ContactForm() {
       {status === 'error' && (
         <p className="form-error" role="alert">{errorMsg}</p>
       )}
+
+      {/* Netlify injects reCAPTCHA 2 widget here at deploy time */}
+      <div data-netlify-recaptcha="true" />
 
       <button
         type="submit"
