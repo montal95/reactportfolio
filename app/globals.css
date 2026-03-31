@@ -1,0 +1,2 @@
+/* CSS layer architecture — expanded in Phase A5 */
+@layer reset, tokens, base, components, pages;

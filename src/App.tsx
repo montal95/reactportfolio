@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./App.scss";
 
-const Home        = lazy(() => import("./pages/Home"));
-const About       = lazy(() => import("./pages/About"));
-const Resumes     = lazy(() => import("./pages/Resumes"));
-const Portfolios  = lazy(() => import("./pages/Portfolios"));
-const Contact     = lazy(() => import("./pages/Contact"));
-const Notfound    = lazy(() => import("./pages/Notfound"));
+const Home        = lazy(() => import("./views/Home"));
+const About       = lazy(() => import("./views/About"));
+const Resumes     = lazy(() => import("./views/Resumes"));
+const Portfolios  = lazy(() => import("./views/Portfolios"));
+const Contact     = lazy(() => import("./views/Contact"));
+const Notfound    = lazy(() => import("./views/Notfound"));
 
 function App(): React.JSX.Element {
   return (
