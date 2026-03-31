@@ -60,13 +60,14 @@
     /* Text */
     --text-heading: #e8e8f0;
     --text-body:    #e8e8f0;
-    --text-muted:   #6b6b80;
+    --text-muted:   #8888a0; /* raised from #6b6b80 — WCAG AA 5.49:1 on --surface */
 
     /* Accents */
     --accent:       #00e5a0;
     --accent-dim:   rgba(0, 229, 160, 0.12);
     --accent-ai:    #7c73e6;
     --accent-ai-dim: rgba(124, 115, 230, 0.12);
+    --skill-chip-ai-text: #a59ef7; /* WCAG AA ~6.7:1 on chip bg in dark mode */
 
     /* Nav */
     --nav-height:         58px;
@@ -121,12 +122,13 @@
 
     --text-heading: #0e0e18;
     --text-body:    #0e0e18;
-    --text-muted:   #8a8a9a;
+    --text-muted:   #6b6b80; /* darkened from #8a8a9a — WCAG AA 5.19:1 on white */
 
     --accent:       #00a372;
     --accent-dim:   rgba(0, 163, 114, 0.12);
     --accent-ai:    #5a52c0;
     --accent-ai-dim: rgba(90, 82, 192, 0.12);
+    --skill-chip-ai-text: #4e47b2; /* WCAG AA ~5.2:1 on chip bg in light mode */
 
     --nav-gradient:       linear-gradient(90deg, rgba(0,163,114,0.07) 0%, transparent 55%, rgba(100,90,200,0.04) 100%);
     --nav-link-inactive:  rgba(0, 0, 0, 0.38);
@@ -1118,7 +1120,7 @@
   .skill-chip--ai {
     background: rgba(124, 115, 230, 0.12);
     border-color: rgba(124, 115, 230, 0.3);
-    color: var(--accent-ai);
+    color: var(--skill-chip-ai-text); /* WCAG AA: lighter purple for chip text */
   }
 
   .skill-categories-grid {
@@ -1420,3 +1422,5 @@
     }
   }
 }
+
+

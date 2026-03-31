@@ -11,26 +11,26 @@ export default function Contact() {
       aria-labelledby="contact-heading"
     >
       <div className="page-container">
-        <h2 className="section-title" id="contact-heading">
+        <h1 className="section-title" id="contact-heading">
           Contact <span className="section-title-accent">Me</span>
-        </h2>
+        </h1>
 
         <div className="contact-grid">
           {/* ── Form ─────────────────────────────────────────────────── */}
           <div className="contact-form-side">
-            <h3 className="contact-sub-heading">Get In Touch</h3>
+            <h2 className="contact-sub-heading">Get In Touch</h2>
             <ContactForm />
           </div>
 
           {/* ── Sidebar ──────────────────────────────────────────────── */}
-          <aside className="contact-sidebar" aria-label="Contact information">
+          <div className="contact-sidebar" aria-label="Contact information">
             {phoneNumbers.length > 0 && (
               <div className="contact-info-block">
                 <span className="contact-info-icon" aria-hidden="true">
                   <Phone size={18} />
                 </span>
                 <div className="contact-info-content">
-                  <h4 className="contact-info-title">Phone</h4>
+                  <h3 className="contact-info-title">Phone</h3>
                   {phoneNumbers.map((num) => (
                     <a
                       key={num}
@@ -50,7 +50,7 @@ export default function Contact() {
                   <Mail size={18} />
                 </span>
                 <div className="contact-info-content">
-                  <h4 className="contact-info-title">Email</h4>
+                  <h3 className="contact-info-title">Email</h3>
                   {emailAddress.map((em) => (
                     <a
                       key={em}
@@ -70,14 +70,15 @@ export default function Contact() {
                   <MapPin size={18} />
                 </span>
                 <div className="contact-info-content">
-                  <h4 className="contact-info-title">Location</h4>
+                  <h3 className="contact-info-title">Location</h3>
                   <p className="contact-info-value">{address}</p>
                 </div>
               </div>
             )}
-          </aside>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+

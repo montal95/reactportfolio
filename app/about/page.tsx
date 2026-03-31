@@ -50,9 +50,9 @@ export default function About() {
         aria-labelledby="about-heading"
       >
         <div className="page-container">
-          <h2 className="section-title" id="about-heading">
+          <h1 className="section-title" id="about-heading">
             About <span className="section-title-accent">Me</span>
-          </h2>
+          </h1>
 
           <div className="about-grid">
             <div className="about-image-wrap">
@@ -66,10 +66,10 @@ export default function About() {
             </div>
 
             <div className="about-content">
-              <h3 className="about-name">
+              <h2 className="about-name">
                 I am{' '}
                 <span className="about-name-accent">{name}</span>
-              </h3>
+              </h2>
               <p className="about-bio">{aboutContent}</p>
 
               <dl className="info-grid" aria-label="Personal information">
@@ -131,3 +131,5 @@ export default function About() {
     </>
   );
 }
+
+

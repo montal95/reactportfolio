@@ -15,9 +15,9 @@ export default function Resume() {
         aria-labelledby="skills-heading"
       >
         <div className="page-container">
-          <h2 className="section-title" id="skills-heading">
+          <h1 className="section-title" id="skills-heading">
             Skills &amp; <span className="section-title-accent">Technologies</span>
-          </h2>
+          </h1>
 
           {/* Active stack — featured row */}
           {activeCategory && (

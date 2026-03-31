@@ -9,9 +9,9 @@ export default function Work() {
       aria-labelledby="work-heading"
     >
       <div className="page-container">
-        <h2 className="section-title" id="work-heading">
+        <h1 className="section-title" id="work-heading">
           My <span className="section-title-accent">Work</span>
-        </h2>
+        </h1>
 
         <div className="work-grid">
           {portfolios.map((project) => (
@@ -29,7 +29,7 @@ export default function Work() {
 
               {/* Body */}
               <div className="project-body">
-                <h3 className="project-title">{project.title}</h3>
+                <h2 className="project-title">{project.title}</h2>
                 <p className="project-subtitle">{project.subtitle}</p>
 
                 {project.url && (
@@ -52,3 +52,4 @@ export default function Work() {
     </section>
   );
 }
+
