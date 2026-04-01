@@ -18,40 +18,36 @@ test.describe('Mobile Hamburger Menu', () => {
   });
 
   test('hamburger button is visible on mobile', async ({ page }) => {
-    const toggler = page.locator('.mi-header-toggler');
-    await expect(toggler).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible();
   });
 
   test('opens and closes the nav menu', async ({ page }) => {
-    const toggler = page.locator('.mi-header-toggler');
-    const header = page.locator('.mi-header');
+    const mobileMenu = page.locator('#mobile-menu');
 
-    // Menu should start hidden (no is-visible class)
-    await expect(header).not.toHaveClass(/is-visible/);
+    // Menu should start hidden
+    await expect(mobileMenu).toBeHidden();
 
     // Open menu
-    await toggler.click();
-    await expect(header).toHaveClass(/is-visible/);
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    await expect(mobileMenu).toBeVisible();
 
     // Close menu
-    await toggler.click();
-    await expect(header).not.toHaveClass(/is-visible/);
+    await page.getByRole('button', { name: 'Close menu' }).click();
+    await expect(mobileMenu).toBeHidden();
   });
 
   test('navigates to About via hamburger menu', async ({ page }) => {
-    const toggler = page.locator('.mi-header-toggler');
-
     // Open menu
-    await toggler.click();
-    await expect(page.locator('.mi-header')).toHaveClass(/is-visible/);
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    await expect(page.locator('#mobile-menu')).toBeVisible();
 
-    // Click About link
-    await page.locator('.mi-header-menu a', { hasText: 'About' }).click();
+    // Click About link inside the mobile drawer
+    await page.locator('#mobile-menu a', { hasText: 'About' }).click();
     await expect(page).toHaveURL(/\/about$/);
 
     // Verify page content loaded
     await expect(
-      page.locator('.mi-sectiontitle h2', { hasText: 'About Me' })
+      page.locator('h1.section-title', { hasText: 'About Me' })
     ).toBeVisible({ timeout: 10_000 });
   });
 });
