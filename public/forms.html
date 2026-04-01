@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <!--
+      Static form for Netlify build-time detection.
+
+      This file is never linked to from navigation. It exists solely so
+      Netlify's post-processing scanner can register the contact form,
+      the honeypot field, and the reCAPTCHA requirement during the build.
+
+      The visible form lives in app/components/ContactForm.tsx and submits
+      via AJAX fetch to "/" with form-name=contact in the request body.
+      Field names here must stay in sync with ContactForm.tsx.
+    -->
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="website"
+      data-netlify-recaptcha="true"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="subject" type="text" />
+      <textarea name="message"></textarea>
+      <input name="website" type="text" />
+      <div data-netlify-recaptcha="true"></div>
+    </form>
+  </body>
+</html>
