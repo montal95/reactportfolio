@@ -130,8 +130,8 @@ export default function HeroContent({
         <Image
           src={brandImage}
           alt="Sam Montalvo Jr"
-          width={260}
-          height={260}
+          width={350}
+          height={350}
           priority
           className="hero-photo"
         />

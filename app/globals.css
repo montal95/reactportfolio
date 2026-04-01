@@ -553,7 +553,7 @@
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 260px;
+    grid-template-columns: 1fr 350px;
     align-items: center;
     gap: var(--sp-xl);
   }
@@ -738,8 +738,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 260px;
-    height: 260px;
+    width: 350px;
+    height: 350px;
     border-radius: var(--radius-lg);
     background: var(--surface);
     border: 1px solid var(--border);
