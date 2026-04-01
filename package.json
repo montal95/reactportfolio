@@ -1,59 +1,41 @@
 {
-  "name": "react-portfolio",
-  "version": "4.1.0",
-  "dependencies": {
-    "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.9.1",
-    "bootstrap": "^5.3.8",
-    "disqus-react": "^1.0.7",
-    "fslightbox-react": "^1.4.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-feather": "^2.0.3",
-    "react-masonry-component": "^6.2.1",
-    "react-on-screen": "^2.1.1",
-    "react-router-dom": "^6.30.3",
-    "react-slick": "^0.25.2",
-    "shave": "^2.5.6",
-    "slick-carousel": "^1.8.1"
-  },
-  "devDependencies": {
-    "@axe-core/playwright": "^4.10.0",
-    "@playwright/test": "^1.49.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^14.3.1",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
-    "@types/react-router-dom": "^5.3.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.0",
-    "jsdom": "^29.0.0",
-    "sass": "^1.83.4",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.0",
-    "vitest": "^4.1.0"
-  },
+  "name": "sammontalvo-next-portfolio",
+  "version": "5.0.0",
+  "private": true,
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 5 chrome version",
-      "last 5 firefox version",
-      "last 5 safari version"
-    ]
+  "dependencies": {
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
+    "framer-motion": "^12.38.0",
+    "fslightbox-react": "^1.4.0",
+    "next": "16.2.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-feather": "^2.0.3",
+    "react-on-screen": "^2.1.1"
   },
-  "overrides": {
-    "htmlparser2": "6.1.0"
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@netlify/plugin-nextjs": "^5.15.9",
+    "@playwright/test": "^1.49.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "20.19.37",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.0",
+    "jsdom": "^29.0.0",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.0"
   }
 }

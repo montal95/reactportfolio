@@ -21,7 +21,7 @@ const KNOWN_ISSUES = [
   // (#02b875) 7.22:1, headings (#fff) 18.68:1 — all on dark backgrounds.
 ];
 
-const ROUTES = ['/', '/about', '/resume', '/portfolios', '/contact'];
+const ROUTES = ['/', '/about', '/resume', '/work', '/contact'];
 
 test.describe('Accessibility Audits', () => {
   for (const route of ROUTES) {

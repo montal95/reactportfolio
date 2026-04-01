@@ -5,7 +5,7 @@ const { defineConfig, devices } = require('@playwright/test');
  * Playwright Configuration
  *
  * Supports two modes:
- * 1. Local dev server (default): starts Vite dev server on port 3000
+ * 1. Local dev server (default): starts Next.js dev server on port 3000
  * 2. Netlify preview: set PLAYWRIGHT_BASE_URL env var to test against a deploy preview
  *
  * Usage:
@@ -51,7 +51,7 @@ module.exports = defineConfig({
     ? {}
     : {
         webServer: {
-          command: 'vite',
+          command: 'next dev',
           url: 'http://localhost:3000',
           reuseExistingServer: !isCI,
           timeout: 120_000,
