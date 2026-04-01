@@ -23,7 +23,7 @@ test.describe('Desktop Navigation', () => {
 
   for (const { label, href, heading } of NAV_LINKS) {
     test(`navigates to ${label} page via nav link`, async ({ page }) => {
-      await page.getByRole('link', { name: label }).click();
+      await page.getByRole('link', { name: label, exact: true }).click();
       await expect(page).toHaveURL(new RegExp(`${href}$`));
 
       if (heading) {
