@@ -3,7 +3,7 @@ import { Syne, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/app/components/ThemeProvider";
 import Nav from "@/app/components/Nav";
-import PageTransition from "@/app/components/PageTransition";
+import TransitionProvider from "@/app/components/TransitionProvider";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -51,7 +51,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Nav />
           <main id="main-content">
-            <PageTransition>{children}</PageTransition>
+            <TransitionProvider>{children}</TransitionProvider>
           </main>
         </ThemeProvider>
       </body>
