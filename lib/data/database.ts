@@ -148,7 +148,7 @@ const database: {
       id: 1,
       title: "sammontalvojr.com",
       subtitle:
-        "This portfolio site — 6-phase modernization from CRA 3 to Vite 8, React 18, and TypeScript.",
+        "This portfolio site — ground-up rebuild from CRA 3 to Next.js 15 App Router with React 19, TypeScript strict mode, Framer Motion, and a native CSS design system.",
       imageUrl: "/images/portfolio-site-sm.webp",
       largeImageUrl: ["/images/portfolio-site-lg.webp"],
       url: "https://github.com/montal95/sammontalvo-next-portfolio",
