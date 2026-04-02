@@ -2,9 +2,9 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a7fe4db5-e077-4f6c-ac6d-eb833ee81b12/deploy-status)](https://app.netlify.com/sites/gallant-hypatia-c82d23/deploys)
 [![CI](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/montal95/reactportfolio/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-4.1.0-blue)](https://github.com/montal95/reactportfolio/releases)
+[![Version](https://img.shields.io/badge/version-5.0.1-blue)](https://github.com/montal95/reactportfolio/releases)
 
-Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) — built with Next.js 15 App Router and React 19, deployed on Netlify. The `feature/nextjs-migration` branch contains a complete ground-up rebuild targeting v5.0.0.
+Personal portfolio site for [sammontalvojr.com](https://www.sammontalvojr.com) — built with Next.js 15 App Router and React 19, deployed on Netlify.
 
 ---
 
@@ -122,7 +122,7 @@ Complete history from CRA 3.4.3 / React 16 / JavaScript baseline to a Next.js 15
 - ✅ **Phase 5** — CRA → Vite migration; WebP image pipeline; Bootstrap tree-shaking; code splitting; TypeScript foundation
 - ✅ **Phase 6** — React 18 (`createRoot`); TypeScript strict mode; static data layer; error boundaries; dead code cleanup
 - ✅ **Phase 7** — Dependency cleanup: `react-lineicons` → `react-feather`; skill chips; expanded services; zero high/critical audit findings
-- 🔄 **Next.js migration (Phases A–J)** — Full App Router rebuild with React 19, Framer Motion, native CSS design system, and updated CI; v5.0.0 in final approach on `feature/nextjs-migration`
+- ✅ **Next.js migration (Phases A–J)** — Full App Router rebuild with React 19, Framer Motion, native CSS design system, and updated CI; v5.0.0 in final approach on `feature/nextjs-migration`
 
 ---
 
