@@ -1,14 +1,16 @@
 'use client';
 
+import React from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 /**
  * TransitionProvider
  *
  * Thin client wrapper that holds AnimatePresence above the template boundary.
- * template.tsx remounts on every navigation, giving Framer Motion real
- * mount/unmount lifecycle events. AnimatePresence here coordinates the
- * exit of the departing template instance before the entering one mounts.
+ * usePathname keys the child on every navigation so AnimatePresence sees a
+ * genuine unmount/remount and can sequence the exit animation before the
+ * entering template mounts.
  *
  * Lives in layout.tsx — never remounts itself.
  */
@@ -17,5 +19,10 @@ export default function TransitionProvider({
 }: {
   children: React.ReactNode;
 }) {
-  return <AnimatePresence mode="wait">{children}</AnimatePresence>;
+  const pathname = usePathname();
+  return (
+    <AnimatePresence mode="wait">
+      {React.cloneElement(children as React.ReactElement, { key: pathname })}
+    </AnimatePresence>
+  );
 }
