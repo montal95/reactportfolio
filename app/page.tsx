@@ -1,18 +1,13 @@
-import dynamic from 'next/dynamic';
 import { information } from '@/lib/data/database';
 import HeroContent from '@/app/components/HeroContent';
-
-const ParticlesBackground = dynamic(
-  () => import('@/app/components/ParticlesBackground'),
-  { ssr: false, loading: () => null }
-);
+import ParticlesLoader from '@/app/components/ParticlesLoader';
 
 export default function Home() {
   const { aboutContent, available, cvfile, brandImage } = information;
 
   return (
     <section className="hero-section" aria-label="Hero">
-      <ParticlesBackground />
+      <ParticlesLoader />
 
       <div className="hero-container">
         <HeroContent
