@@ -42,3 +42,6 @@ next-env.d.ts
 # nvidia driver logs  
 NVIDIA Corporation/ 
 dev-server.log 
+
+# Claude Code local settings
+.claude/
