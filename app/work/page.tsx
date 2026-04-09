@@ -14,7 +14,7 @@ export default function Work() {
         </h1>
 
         <div className="work-grid">
-          {portfolios.map((project) => (
+          {portfolios.map((project, index) => (
             <article className="project-card" key={project.id}>
               {/* Image */}
               <div className="project-image-wrap">
@@ -24,6 +24,7 @@ export default function Work() {
                   width={560}
                   height={315}
                   className="project-image"
+                  priority={index === 0}
                 />
               </div>
 
