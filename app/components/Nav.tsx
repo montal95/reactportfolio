@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'react-feather';
 import { useTheme } from './ThemeProvider';
@@ -18,12 +18,19 @@ export default function Nav() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <nav className="site-nav" aria-label="Main navigation">
+    <nav className={`site-nav${scrolled ? ' is-scrolled' : ''}`} aria-label="Main navigation">
       <div className="nav-inner">
 
         {/* Logo */}

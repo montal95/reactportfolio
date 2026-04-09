@@ -25,7 +25,8 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem('theme') as Theme | null;
     const initial: Theme = stored === 'light' ? 'light' : 'dark';
     setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
+    // data-theme is set synchronously by the inline blocking script in
+    // layout.tsx before React hydrates. Only toggleTheme touches it at runtime.
   }, []);
 
   const toggleTheme = () => {

@@ -62,6 +62,7 @@ export default function About() {
                 width={520}
                 height={380}
                 className="about-image"
+                priority
               />
             </div>
 

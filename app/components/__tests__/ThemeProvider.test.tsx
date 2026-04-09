@@ -64,4 +64,13 @@ describe('ThemeProvider', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Toggle' }))
     expect(document.documentElement.getAttribute('data-theme')).toBe('light')
   })
+
+  it('does not set data-theme on <html> on mount — blocking script owns initial paint', () => {
+    // The inline script in layout.tsx sets data-theme synchronously before React
+    // hydrates. ThemeProvider.useEffect must only sync React state, not touch
+    // the DOM attribute — otherwise it races with and undermines the blocking script.
+    localStorage.setItem('theme', 'light')
+    renderWithProvider()
+    expect(document.documentElement.getAttribute('data-theme')).toBeNull()
+  })
 })

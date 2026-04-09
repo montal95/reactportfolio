@@ -40,7 +40,20 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${syne.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Blocking script — runs synchronously before first paint.
+            Reads localStorage and sets data-theme on <html> before React
+            hydrates, eliminating the dark flash (FOUC) on theme restore.
+            The try/catch guards against environments where localStorage
+            is unavailable (SSR, private browsing restrictions). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body>
         <a href="#main-content" className="skip-link">
           Skip to main content
