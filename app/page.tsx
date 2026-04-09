@@ -1,6 +1,11 @@
+import dynamic from 'next/dynamic';
 import { information } from '@/lib/data/database';
 import HeroContent from '@/app/components/HeroContent';
-import ParticlesBackground from '@/app/components/ParticlesBackground';
+
+const ParticlesBackground = dynamic(
+  () => import('@/app/components/ParticlesBackground'),
+  { ssr: false, loading: () => null }
+);
 
 export default function Home() {
   const { aboutContent, available, cvfile, brandImage } = information;
