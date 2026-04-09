@@ -1,70 +1,26 @@
 'use client';
 
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useActionState, useState } from 'react';
 import { Send } from 'react-feather';
+import { submitContact, type ContactState } from '@/app/actions/contact';
 
-interface Fields {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  website: string; // honeypot
-}
+const initial: ContactState = { status: 'idle', message: '' };
 
-const EMPTY: Fields = { name: '', email: '', subject: '', message: '', website: '' };
+/**
+ * Inner form — holds useActionState. Remounted by ContactForm when the
+ * user clicks "Send another", which resets both action state and the
+ * uncontrolled inputs in one shot without any useEffect gymnastics.
+ */
+function ContactFormInner({ onReset }: { onReset: () => void }) {
+  const [state, formAction, isPending] = useActionState(submitContact, initial);
 
-type Status = 'idle' | 'sending' | 'success' | 'error';
-
-export default function ContactForm() {
-  const [fields, setFields] = useState<Fields>(EMPTY);
-  const [status, setStatus]   = useState<Status>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Honeypot — silently succeed for bots
-    if (fields.website) { setStatus('success'); return; }
-
-    // Client-side validation
-    const required = ['name', 'email', 'subject', 'message'] as const;
-    const missing = required.find((k) => !fields[k].trim());
-    if (missing) {
-      setStatus('error');
-      setErrorMsg(`${missing.charAt(0).toUpperCase() + missing.slice(1)} is required.`);
-      return;
-    }
-
-    setStatus('sending');
-    try {
-      // Use FormData from the form element so Netlify's injected
-      // g-recaptcha-response token is automatically included in the body.
-      const formData = new FormData(e.currentTarget);
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(
-          Array.from(formData.entries()) as Array<[string, string]>
-        ).toString(),
-      });
-      if (res.ok) { setFields(EMPTY); setStatus('success'); }
-      else throw new Error(`HTTP ${res.status}`);
-    } catch {
-      setStatus('error');
-      setErrorMsg('Something went wrong. Please try again.');
-    }
-  };
-
-  if (status === 'success') {
+  if (state.status === 'success') {
     return (
       <div className="contact-success" role="status" aria-live="polite">
         <div className="contact-success-icon" aria-hidden="true">✓</div>
         <h3>Message sent!</h3>
         <p>Thanks for reaching out — I&apos;ll get back to you soon.</p>
-        <button className="btn-ghost" onClick={() => setStatus('idle')}>
+        <button className="btn-ghost" onClick={onReset}>
           Send another
         </button>
       </div>
@@ -72,24 +28,14 @@ export default function ContactForm() {
   }
 
   return (
-    <form
-      name="contact"
-      method="POST"
-      onSubmit={handleSubmit}
-      className="contact-form"
-      noValidate
-    >
-      {/* Required for Netlify to associate AJAX submissions with this form */}
-      <input type="hidden" name="form-name" value="contact" />
-
+    <form action={formAction} className="contact-form" noValidate>
       <div className="form-group">
         <label htmlFor="cf-name" className="form-label">
           Name <span aria-hidden="true">*</span>
         </label>
         <input
           id="cf-name" type="text" name="name"
-          className="form-input" value={fields.name}
-          onChange={handleChange} required autoComplete="name"
+          className="form-input" required autoComplete="name"
         />
       </div>
 
@@ -99,8 +45,7 @@ export default function ContactForm() {
         </label>
         <input
           id="cf-email" type="email" name="email"
-          className="form-input" value={fields.email}
-          onChange={handleChange} required autoComplete="email"
+          className="form-input" required autoComplete="email"
         />
       </div>
 
@@ -110,8 +55,7 @@ export default function ContactForm() {
         </label>
         <input
           id="cf-subject" type="text" name="subject"
-          className="form-input" value={fields.subject}
-          onChange={handleChange} required
+          className="form-input" required
         />
       </div>
 
@@ -122,37 +66,43 @@ export default function ContactForm() {
         <textarea
           id="cf-message" name="message"
           className="form-input form-textarea"
-          value={fields.message} onChange={handleChange}
           rows={6} required
         />
       </div>
 
-      {/* Honeypot — hidden from humans */}
+      {/* Honeypot — hidden from humans, checked server-side */}
       <div className="form-honeypot" aria-hidden="true">
         <label htmlFor="cf-website">Website</label>
         <input
           id="cf-website" type="text" name="website"
-          value={fields.website} onChange={handleChange}
           tabIndex={-1} autoComplete="off"
         />
       </div>
 
-      {status === 'error' && (
-        <p className="form-error" role="alert">{errorMsg}</p>
+      {state.status === 'error' && (
+        <p className="form-error" role="alert">{state.message}</p>
       )}
-
-      {/* Netlify injects reCAPTCHA 2 widget here at deploy time */}
-      <div data-netlify-recaptcha="true" />
 
       <button
         type="submit"
         className="btn-primary contact-submit"
-        disabled={status === 'sending'}
-        aria-busy={status === 'sending'}
+        disabled={isPending}
+        aria-busy={isPending}
       >
         <Send size={15} aria-hidden="true" />
-        {status === 'sending' ? 'Sending…' : 'Send message'}
+        {isPending ? 'Sending…' : 'Send message'}
       </button>
     </form>
+  );
+}
+
+/** Exported component — manages the reset key that remounts ContactFormInner. */
+export default function ContactForm() {
+  const [resetKey, setResetKey] = useState(0);
+  return (
+    <ContactFormInner
+      key={resetKey}
+      onReset={() => setResetKey((k) => k + 1)}
+    />
   );
 }
