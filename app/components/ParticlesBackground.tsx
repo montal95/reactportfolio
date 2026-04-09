@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import type { ISourceOptions } from '@tsparticles/engine';
 
 // Stable config reference — defined outside component to avoid re-renders
-const options = {
+const options: ISourceOptions = {
   particles: {
     number: {
       value: 160,
@@ -21,28 +23,29 @@ const options = {
       enable: true,
       random: true,
       speed: 1,
-      direction: 'top' as const,
-      outModes: { default: 'out' as const },
+      direction: 'top',
+      outModes: { default: 'out' },
     },
   },
-} as const;
+};
 
 export default function ParticlesBackground() {
+  const reduce = useReducedMotion();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    if (reduce) return;
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => setReady(true));
-  }, []);
+  }, [reduce]);
 
-  if (!ready) return null;
+  if (reduce || !ready) return null;
 
   return (
     <Particles
       className="hero-particles"
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      options={options as any}
+      options={options}
     />
   );
 }
