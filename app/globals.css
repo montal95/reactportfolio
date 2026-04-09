@@ -342,6 +342,15 @@
     -webkit-backdrop-filter: blur(var(--glass-blur));
   }
 
+  /* Solidify nav background once the user scrolls past the top edge.
+     Preserves the glass aesthetic at rest; prevents content bleed-through
+     when page content is underneath the sticky bar. */
+  .site-nav.is-scrolled {
+    background: color-mix(in oklch, var(--bg) 88%, transparent);
+    border-bottom-color: var(--border);
+    transition: background 0.2s ease, border-bottom-color 0.2s ease;
+  }
+
   .nav-inner {
     max-width: var(--container-max);
     margin: 0 auto;
@@ -597,11 +606,12 @@
   .hero-name {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: clamp(42px, 5vw, 64px);
+    font-size: clamp(1.75rem, 9vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: var(--text-heading);
     margin: 0;
+    overflow-wrap: break-word;
   }
 
   .hero-name-accent {

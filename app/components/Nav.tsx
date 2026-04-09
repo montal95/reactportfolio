@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Sun, Moon, Menu, X } from 'react-feather';
 import { useTheme } from './ThemeProvider';
 
@@ -18,12 +18,20 @@ export default function Nav() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <nav className="site-nav" aria-label="Main navigation">
+    <nav className={`site-nav${scrolled ? ' is-scrolled' : ''}`} aria-label="Main navigation">
       <div className="nav-inner">
 
         {/* Logo */}
@@ -88,7 +96,7 @@ export default function Nav() {
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: reduce ? 0 : 0.25, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
             <ul role="list">

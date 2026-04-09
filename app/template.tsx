@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 /**
  * Template
@@ -11,18 +11,23 @@ import { motion } from 'framer-motion';
  *
  * exit fires as this instance unmounts (navigation away).
  * initial/animate fire as the new instance mounts (navigation in).
+ *
+ * useReducedMotion() respects prefers-reduced-motion (WCAG 2.3.3):
+ * when true, transitions become instant opacity-only fades (no movement).
  */
 export default function Template({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const reduce = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14 }}
+      initial={{ opacity: 0, y: reduce ? 0 : 14 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
+      exit={{ opacity: 0, y: reduce ? 0 : -8 }}
+      transition={{ duration: reduce ? 0 : 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{ minHeight: '100%' }}
     >
       {children}

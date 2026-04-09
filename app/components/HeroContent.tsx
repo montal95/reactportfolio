@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import SocialRow from '@/app/components/SocialRow';
@@ -82,9 +83,9 @@ export default function HeroContent({
         </motion.p>
 
         <motion.div className="hero-ctas" variants={textItem}>
-          <a href="/work" className="btn-primary">
+          <Link href="/work" className="btn-primary">
             View my work
-          </a>
+          </Link>
           <a
             href={cvfile}
             className="btn-ghost"
