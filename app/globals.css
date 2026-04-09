@@ -606,11 +606,12 @@
   .hero-name {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: clamp(42px, 5vw, 64px);
+    font-size: clamp(1.75rem, 9vw, 64px);
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: var(--text-heading);
     margin: 0;
+    overflow-wrap: break-word;
   }
 
   .hero-name-accent {
